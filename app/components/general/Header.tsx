@@ -26,24 +26,28 @@ const Header = () => {
 			{/* Bottom-right corner */}
 			<div className="absolute bottom-0 right-0 w-0 h-0 border-l-30 border-l-transparent border-b-30 border-b-secondary"></div>
 			{/* Desktop Header */}
-			<div className="hidden md:block border border-secondary px-6 py-4">
+			<div className="hidden md:block border border-secondary px-6 py-6">
 				<nav className="max-w-[1440px] mx-auto flex justify-between items-center ">
-					<Image src="/logo.png" alt="Night Club Logo" width={150} height={150} />
-					<ol className="flex gap-4 uppercase">
-						<li>
-							<Link href="/" className={`transition-colors ${isActive("/") ? "text-secondary" : "hover:text-secondary"}`}>
+					<Image src="/logo.png" alt="Night Club Logo" width={228} height={54} />
+					<ol className="flex gap-6 uppercase">
+						<li className="min-w-12">
+							<Link href="/" className={`transition-colors flex flex-col items-center ${isActive("/") ? "text-secondary" : "hover:text-secondary"}`}>
 								Home
 								<Image src="/bottom_line2.png" alt="Underline" width={48} height={2} className={`mt-1 ${isActive("/") ? "block" : "hidden"}`} />
 							</Link>
 						</li>
-						<li>
-							<Link href="/blog" className={`transition-colors ${isActive("/blog") ? "text-secondary" : "hover:text-secondary"}`}>
+						<li className="min-w-12">
+							<Link
+								href="/blog"
+								className={`transition-colors flex flex-col items-center ${isActive("/blog") ? "text-secondary" : "hover:text-secondary"}`}>
 								Blog
 								<Image src="/bottom_line2.png" alt="Underline" width={48} height={2} className={`mt-1 ${isActive("/blog") ? "block" : "hidden"}`} />
 							</Link>
 						</li>
-						<li>
-							<Link href="/book-table" className={`transition-colors ${isActive("/book-table") ? "text-secondary" : "hover:text-secondary"}`}>
+						<li className="min-w-12">
+							<Link
+								href="/book-table"
+								className={`transition-colors flex flex-col items-center ${isActive("/book-table") ? "text-secondary" : "hover:text-secondary"}`}>
 								Book table
 								<Image
 									src="/bottom_line2.png"
@@ -54,8 +58,10 @@ const Header = () => {
 								/>
 							</Link>
 						</li>
-						<li>
-							<Link href="/contact-us" className={`transition-colors ${isActive("/contact-us") ? "text-secondary" : "hover:text-secondary"}`}>
+						<li className="min-w-12">
+							<Link
+								href="/contact-us"
+								className={`transition-colors flex flex-col items-center ${isActive("/contact-us") ? "text-secondary" : "hover:text-secondary"}`}>
 								Contact us
 								<Image
 									src="/bottom_line2.png"
@@ -71,8 +77,8 @@ const Header = () => {
 			</div>
 
 			{/* Mobile Header */}
-			<div className="md:hidden flex justify-between items-center p-4 border border-secondary">
-				<Image src="/logo.png" alt="Night Club Logo" width={100} height={100} />
+			<div className="md:hidden flex justify-between items-center p-6 border border-secondary">
+				<Image src="/logo.png" alt="Night Club Logo" width={189} height={46} />
 				<button onClick={toggleMenu} className="text-white text-3xl cursor-pointer">
 					<RiMenu3Line />
 				</button>
