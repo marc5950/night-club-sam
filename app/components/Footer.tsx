@@ -37,12 +37,12 @@ const Footer = () => {
 
 	return (
 		<footer
-			className="flex justify-center py-12"
+			className="flex md:justify-center py-12 px-4"
 			style={{
 				background:
 					"linear-gradient(0deg, rgba(0, 0, 0, 0.90) 0%, rgba(0, 0, 0, 0.90) 100%), url('/bg/footerbg.jpg') lightgray 50% / cover no-repeat",
 			}}>
-			<div className="max-w-[1020px] flex flex-col gap-12 px-4">
+			<div className="max-w-[1440px] flex flex-col gap-12 ">
 				<div className=" w-full grid grid-cols-1 md:grid-cols-3 gap-8">
 					{/* Location & Opening Hours */}
 					<div className="flex flex-col gap-4">
@@ -92,17 +92,17 @@ const Footer = () => {
 						</div>
 					</div>
 				</div>
-				<div className="flex justify-between items-end">
-					<p className="text-lg">Night Club PSD Template - All rights reserved.</p>
+				<div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6">
+					<p className="text-lg max-w-[250px]">Night Club PSD Template - All rights reserved.</p>
 					<div className="flex flex-col items-center">
 						<h3 className="text-lg">Stay Connected With Us</h3>
 						<div className="flex gap-4 mt-2">
-							<FaFacebookF className="border border-white p-2 h-12 w-12" />
-							<FaSnapchatGhost className="border border-white p-2 h-12 w-12" />
-							<FaInstagram className="border border-white p-2 h-12 w-12" />
+							<FaFacebookF className="border cursor-pointer border-white p-2 h-12 w-12" />
+							<FaSnapchatGhost className="border cursor-pointer border-white p-2 h-12 w-12" />
+							<FaInstagram className="border cursor-pointer border-white p-2 h-12 w-12" />
 						</div>
 					</div>
-					<p className="text-lg">Copyright &copy; {new Date().getFullYear()} NightClub</p>
+					<p className="text-lg max-w-[250px] text-end">Copyright &copy; {new Date().getFullYear()} NightClub</p>
 				</div>
 			</div>
 		</footer>
