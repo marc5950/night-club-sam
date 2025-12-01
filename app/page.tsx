@@ -1,7 +1,11 @@
+import WelcomeInNightclub from "./components/welcome-in-nightclub/WelcomeInNightclub";
+
 export default function Home() {
 	return (
 		<div className="bg-black">
-			<main></main>
+			<main>
+				<WelcomeInNightclub />
+			</main>
 		</div>
 	);
 }
