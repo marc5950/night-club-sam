@@ -1,3 +1,4 @@
+import Hero from "./components/hero/Hero";
 import WelcomeInNightclub from "./components/welcome-in-nightclub/WelcomeInNightclub";
 import Newsletter from "./components/Newsletter";
 
@@ -10,4 +11,5 @@ export default function Home() {
       </main>
     </div>
   );
+
 }

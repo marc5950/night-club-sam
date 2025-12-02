@@ -19,7 +19,7 @@ const Header = () => {
 	};
 
 	return (
-		<header className="relative">
+		<header className="relative bg-black">
 			{/* Top-left corner */}
 			<div className="absolute top-0 left-0 w-0 h-0 border-r-30 border-r-transparent border-t-30 border-t-secondary"></div>
 
@@ -28,7 +28,7 @@ const Header = () => {
 			{/* Desktop Header */}
 			<div className="hidden md:block border border-secondary px-6 py-6">
 				<nav className="max-w-[1440px] mx-auto flex justify-between items-center ">
-					<Image src="/logo.png" alt="Night Club Logo" width={228} height={54} />
+					<Image src="/icon/Logo_main.svg" alt="Night Club Logo" width={228} height={54} />
 					<ol className="flex gap-6 uppercase">
 						<li className="min-w-12">
 							<Link href="/" className={`transition-colors flex flex-col items-center ${isActive("/") ? "text-secondary" : "hover:text-secondary"}`}>
@@ -78,7 +78,7 @@ const Header = () => {
 
 			{/* Mobile Header */}
 			<div className="md:hidden flex justify-between items-center p-6 border border-secondary">
-				<Image src="/logo.png" alt="Night Club Logo" width={189} height={46} />
+				<Image src="/icon/Logo_main.svg" alt="Night Club Logo" width={189} height={46} />
 				<button onClick={toggleMenu} className="text-white text-3xl cursor-pointer">
 					<RiMenu3Line />
 				</button>
