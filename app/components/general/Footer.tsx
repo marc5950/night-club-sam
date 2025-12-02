@@ -45,8 +45,8 @@ const Footer = () => {
 			<div className="max-w-[1440px] flex flex-col gap-12 ">
 				<div className=" w-full grid grid-cols-1 md:grid-cols-3 gap-8">
 					{/* Location & Opening Hours */}
-					<div className="flex flex-col gap-4">
-						<Image src="/logo.png" alt="Night Club Logo" width={150} height={150} />
+					<div className="flex flex-col gap-6">
+						<Image src="/icon/Logo_main.svg" alt="Night Club Logo" width={150} height={150} />
 						<div>
 							<h2 className="uppercase text-secondary font-bold mb-2 text-2xl">Location</h2>
 							<p className="text-gray-300 text-lg">
@@ -63,7 +63,7 @@ const Footer = () => {
 					{/* Recent Posts */}
 					<div className="flex flex-col">
 						<h2 className="uppercase text-secondary font-bold mb-4 text-2xl">Recent Posts</h2>
-						<div className="flex flex-1 flex-col gap-4 justify-between">
+						<div className="flex flex-1 flex-col gap-6">
 							{recentPosts.map((post) => (
 								<div key={post.id} className="flex gap-3">
 									<Image src={post.image} alt={post.title} width={80} height={80} className="object-cover" />
@@ -79,7 +79,7 @@ const Footer = () => {
 					{/* Recent Tweets */}
 					<div>
 						<h2 className="uppercase text-secondary font-bold mb-4 text-2xl">Recent Tweets</h2>
-						<div className="flex flex-col gap-4">
+						<div className="flex flex-col gap-6">
 							{recentTweets.map((tweet) => (
 								<div key={tweet.id} className="flex gap-3">
 									<FaTwitter className="text-secondary text-xl shrink-0 mt-1" />
