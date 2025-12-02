@@ -72,7 +72,7 @@ const BookForm = () => {
         {errors.comment && <p className="text-red-500 mt-1">{errors.comment.message}</p>}
       </div>
       <div className="flex justify-end">
-        <Button text="Submit" />
+        <Button text="Reserve" />
       </div>
     </form>
   );
