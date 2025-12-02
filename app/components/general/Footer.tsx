@@ -37,16 +37,16 @@ const Footer = () => {
 
 	return (
 		<footer
-			className="flex md:justify-center py-12 px-4"
+			className="flex text-center md:text-left justify-center py-12 px-4"
 			style={{
 				background:
 					"linear-gradient(0deg, rgba(0, 0, 0, 0.90) 0%, rgba(0, 0, 0, 0.90) 100%), url('/bg/footerbg.jpg') lightgray 50% / cover no-repeat",
 			}}>
-			<div className="max-w-[1440px] flex flex-col gap-12 ">
+			<div className="max-w-[1440px] flex flex-col gap-12">
 				<div className=" w-full grid grid-cols-1 md:grid-cols-3 gap-8">
 					{/* Location & Opening Hours */}
-					<div className="flex flex-col gap-6">
-						<Image src="/icon/Logo_main.svg" alt="Night Club Logo" width={150} height={150} />
+					<div className="flex flex-col gap-6 items-center md:items-start">
+						<Image src="/icon/Logo_main.svg" alt="Night Club Logo" width={228} height={54} />
 						<div>
 							<h2 className="uppercase text-secondary font-bold mb-2 text-2xl">Location</h2>
 							<p className="text-white text-lg">
@@ -61,7 +61,7 @@ const Footer = () => {
 					</div>
 
 					{/* Recent Posts */}
-					<div className="flex flex-col">
+					<div className="hidden md:block">
 						<h2 className="uppercase text-secondary font-bold mb-4 text-2xl">Recent Posts</h2>
 						<div className="flex flex-1 flex-col gap-6">
 							{recentPosts.map((post) => (
@@ -77,7 +77,7 @@ const Footer = () => {
 					</div>
 
 					{/* Recent Tweets */}
-					<div>
+					<div className="hidden md:block">
 						<h2 className="uppercase text-secondary font-bold mb-4 text-2xl">Recent Tweets</h2>
 						<div className="flex flex-col gap-6">
 							{recentTweets.map((tweet) => (
@@ -92,7 +92,7 @@ const Footer = () => {
 						</div>
 					</div>
 				</div>
-				<div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6">
+				<div className="flex flex-col md:flex-row justify-between  md:items-end gap-6 items-center">
 					<p className="text-lg max-w-[250px] text-white">Night Club PSD Template - All rights reserved.</p>
 					<div className="flex flex-col items-center">
 						<h3 className="text-lg text-white">Stay Connected With Us</h3>
