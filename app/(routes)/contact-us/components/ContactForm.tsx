@@ -1,4 +1,5 @@
 "use client";
+import Button from "@/app/components/general/Button";
 import { useForm } from "react-hook-form";
 
 const ContactForm = () => {
@@ -41,6 +42,9 @@ const ContactForm = () => {
           <textarea className="placeholder-white focus:bg-black bg-black p-4 w-full h-70" id="comment" placeholder="Your Comment" {...register("comment", { required: "Comment is required" })}></textarea>
           {errors.comment && <p className="text-red-500 mt-1">{errors.comment.message}</p>}
         </div>
+      </div>
+      <div className="flex justify-end">
+        <Button text="Send" />
       </div>
     </form>
   );
