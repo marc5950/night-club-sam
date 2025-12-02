@@ -31,7 +31,9 @@ const Header = () => {
 					<Image src="/icon/Logo_main.svg" alt="Night Club Logo" width={228} height={54} />
 					<ol className="flex gap-6 uppercase">
 						<li className="min-w-12">
-							<Link href="/" className={`transition-colors flex flex-col items-center ${isActive("/") ? "text-secondary" : "hover:text-secondary"}`}>
+							<Link
+								href="/"
+								className={`transition-colors flex flex-col items-center ${isActive("/") ? "text-secondary" : "text-white hover:text-secondary"}`}>
 								Home
 								<Image src="/bottom_line2.png" alt="Underline" width={48} height={2} className={`mt-1 ${isActive("/") ? "block" : "hidden"}`} />
 							</Link>
@@ -39,7 +41,7 @@ const Header = () => {
 						<li className="min-w-12">
 							<Link
 								href="/blog"
-								className={`transition-colors flex flex-col items-center ${isActive("/blog") ? "text-secondary" : "hover:text-secondary"}`}>
+								className={`transition-colors flex flex-col items-center ${isActive("/blog") ? "text-secondary" : "text-white hover:text-secondary"}`}>
 								Blog
 								<Image src="/bottom_line2.png" alt="Underline" width={48} height={2} className={`mt-1 ${isActive("/blog") ? "block" : "hidden"}`} />
 							</Link>
@@ -47,7 +49,7 @@ const Header = () => {
 						<li className="min-w-12">
 							<Link
 								href="/book-table"
-								className={`transition-colors flex flex-col items-center ${isActive("/book-table") ? "text-secondary" : "hover:text-secondary"}`}>
+								className={`transition-colors flex flex-col items-center ${isActive("/book-table") ? "text-secondary" : "text-white hover:text-secondary"}`}>
 								Book table
 								<Image
 									src="/bottom_line2.png"
@@ -61,7 +63,7 @@ const Header = () => {
 						<li className="min-w-12">
 							<Link
 								href="/contact-us"
-								className={`transition-colors flex flex-col items-center ${isActive("/contact-us") ? "text-secondary" : "hover:text-secondary"}`}>
+								className={`transition-colors flex flex-col items-center ${isActive("/contact-us") ? "text-secondary" : "text-white hover:text-secondary"}`}>
 								Contact us
 								<Image
 									src="/bottom_line2.png"
