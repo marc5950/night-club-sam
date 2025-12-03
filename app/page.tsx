@@ -3,13 +3,13 @@ import WelcomeInNightclub from "./components/welcome-in-nightclub/WelcomeInNight
 import Newsletter from "./components/Newsletter";
 
 export default function Home() {
-	return (
-		<div className="bg-black">
-			<main>
-				<Hero />
-				<WelcomeInNightclub />
-				<Newsletter />
-			</main>
-		</div>
-	);
+  return (
+    <div className='bg-black'>
+      <main>
+        <Hero />
+        <WelcomeInNightclub />
+        <Newsletter />
+      </main>
+    </div>
+  );
 }

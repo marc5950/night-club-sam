@@ -1,9 +1,10 @@
+import HeroSmall from "../../components/general/HeroSmall";
 import BookForm from "./components/BookForm";
 
 const bookTable = () => {
   return (
     <main>
-      <h1>Book a Table</h1>
+      <HeroSmall title='Book Table' />
       <BookForm />
     </main>
   );
