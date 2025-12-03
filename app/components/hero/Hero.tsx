@@ -10,7 +10,6 @@ const Hero = () => {
 	const [backgroundImage, setBackgroundImage] = useState("");
 	const [showLogo, setShowLogo] = useState(false);
 	const [showTagline, setShowTagline] = useState(false);
-	const [isHeaderSticky, setIsHeaderSticky] = useState(false);
 
 	useEffect(() => {
 		// Vælg tilfældigt baggrundsbillede
@@ -35,22 +34,6 @@ const Hero = () => {
 				}, 500);
 			}, 500);
 		};
-
-		// Scroll event for sticky header
-		const handleScroll = () => {
-			const heroHeight = window.innerHeight;
-			const scrollPosition = window.scrollY;
-
-			// Når vi scroller forbi hero, gør header sticky
-			if (scrollPosition > heroHeight - 100) {
-				setIsHeaderSticky(true);
-			} else {
-				setIsHeaderSticky(false);
-			}
-		};
-
-		window.addEventListener("scroll", handleScroll);
-		return () => window.removeEventListener("scroll", handleScroll);
 	}, []);
 
 	return (
@@ -87,15 +70,9 @@ const Hero = () => {
 						<Image src="/bottom_line.png" alt="Line" width={300} height={50} />
 					</div>
 				</div>
-
-				{/* Header i bunden af Hero */}
-				<div className="absolute bottom-0 left-0 right-0 z-20">
-					<Header />
-				</div>
 			</section>
-
 			{/* Sticky Header */}
-			<div className={`fixed top-0 left-0 right-0 z-50 ${isHeaderSticky ? "translate-y-0" : "-translate-y-full"}`}>
+			<div className={`sticky top-0 z-50 `}>
 				<Header />
 			</div>
 		</>
