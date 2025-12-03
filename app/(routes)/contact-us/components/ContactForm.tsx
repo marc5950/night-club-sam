@@ -24,7 +24,7 @@ const ContactForm = () => {
         </div>
         <div className="mb-4">
           <input
-            className="text-white focus:bg-black  focus:border-[#FF2A70] focus:outline-none focus:ring-0 bg-black border border-white placeholder-white p-4 w-full"
+            className="text-white focus:bg-black focus:border-[#FF2A70] focus:outline-none focus:ring-0 bg-black border border-white placeholder-white p-4 w-full"
             id="email"
             type="email"
             placeholder="Your Email"
@@ -39,7 +39,7 @@ const ContactForm = () => {
           {errors.email && <p>{errors.email.message}</p>}
         </div>
         <div className="mb-4">
-          <textarea className="placeholder-white focus:bg-black  focus:border-[#FF2A70] border border-white bg-black p-4 w-full h-70 focus:outline-none focus:ring-0" id="comment" placeholder="Your Comment" {...register("comment", { required: "Comment is required" })}></textarea>
+          <textarea className="placeholder-white focus:bg-black focus:border-[#FF2A70] border border-white bg-black p-4 w-full h-70 focus:outline-none focus:ring-0" id="comment" placeholder="Your Comment" {...register("comment", { required: "Comment is required" })}></textarea>
           {errors.comment && <p className="text-red-500 mt-1">{errors.comment.message}</p>}
         </div>
         <div className="flex justify-end">
