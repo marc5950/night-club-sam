@@ -92,6 +92,7 @@ const Footer = () => {
 						</div>
 					</div>
 				</div>
+				{/* Copy right */}
 				<div className="flex flex-col md:flex-row justify-between  md:items-end gap-6 items-center">
 					<p className="text-lg max-w-[250px] text-white">Night Club PSD Template - All rights reserved.</p>
 					<div className="flex flex-col items-center">

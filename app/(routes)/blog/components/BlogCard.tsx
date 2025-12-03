@@ -10,30 +10,40 @@ interface BlogCardProps {
 
 const BlogCard = ({ post, imagePosition }: BlogCardProps) => {
 	console.log("BlogCard post:", post);
-	// Beregn antal kommentarer
+
+	// Beregn antal kommentarer fra post.comments array
+	// ?. er optional chaining - tjekker om comments eksisterer før .length
+	// || 0 giver default værdi 0 hvis comments er undefined
 	const commentCount = post.comments?.length || 0;
 
-	// Formater dato
+	// Formater dato til dansk format
+	// Eksempel output: "2. december 2025"
 	const formattedDate = post.createdAt
 		? new Date(post.createdAt).toLocaleDateString("da-DK", {
-				day: "numeric",
-				month: "long",
-				year: "numeric",
+				day: "numeric", // Dag uden foranstillet 0
+				month: "long", // Fuld måned navn
+				year: "numeric", // Fuldt årstal
 			})
 		: "";
 
-	// Lav et uddrag af content (max 6 linjer ~ 300 tegn)
+	// Lav et uddrag af content til preview (max 6 linjer ~ 300 tegn)
+	// substring(0, 300) tager de første 300 karakterer
+	// Ternary operator: hvis længere end 300, tilføj "...", ellers vis alt
 	const udrag = post.content.length > 300 ? post.content.substring(0, 300) + "..." : post.content;
-
 	return (
-		<article className={`flex flex-col ${imagePosition === "left" ? "lg:flex-row" : "lg:flex-row-reverse"} gap-8 mb-16 overflow-hidden`}>
+		<article
+			className={`flex flex-col ${
+				// Dynamisk styling: Skift mellem billede til venstre og højre
+				// Template literal med ternary operator for conditional classes
+				imagePosition === "left" ? "md:flex-row" : "md:flex-row-reverse"
+			} gap-4  overflow-hidden`}>
 			{/* Billede */}
-			<div className="lg:w-1/2 relative h-[400px]">
+			<div className="md:w-1/2 relative h-[400px]">
 				<Image src={post.asset.url} alt={post.asset.alt || post.title} fill className="object-cover" unoptimized />
 			</div>
 
 			{/* Tekst indhold */}
-			<div className="lg:w-1/2 p-8 flex flex-col justify-center">
+			<div className="md:w-1/2 p-8 flex flex-col justify-center">
 				<h2 className="text-3xl font-bold text-white mb-4">{post.title}</h2>
 
 				{/* Byline/dato/kommentarer */}
