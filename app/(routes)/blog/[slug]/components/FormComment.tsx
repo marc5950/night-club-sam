@@ -20,12 +20,12 @@ const FormComment = () => {
       <h3 className="text-white text-[32px] mb-4 font-bold">LEAVE A COMMENT</h3>
       <div className="grid grid-cols-1 md:grid-cols-2 md:gap-4 mx-auto">
         <div className="mb-4">
-          <input className="text-white  focus:bg-black bg-black border border-white placeholder-white p-4 w-full" id="name" placeholder="Your Name" {...register("name", { required: "Name is required" })} />
+          <input className="text-white focus:outline-none focus:border-[#FF2A70] focus:ring-0  focus:bg-black bg-black border border-white placeholder-white p-4 w-full" id="name" placeholder="Your Name" {...register("name", { required: "Name is required" })} />
           {errors.name && <p>{errors.name.message}</p>}
         </div>
         <div className="mb-4">
           <input
-            className="text-white focus:bg-black bg-black border border-white placeholder-white p-4 w-full"
+            className="text-white focus:outline-none focus:border-[#FF2A70] focus:ring-0 focus:bg-black bg-black border border-white placeholder-white p-4 w-full"
             id="email"
             type="email"
             placeholder="Your Email"
@@ -40,8 +40,8 @@ const FormComment = () => {
           {errors.email && <p>{errors.email.message}</p>}
         </div>
       </div>
-      <div className="border border-white mb-4">
-        <textarea className="placeholder-white focus:bg-black bg-black p-4 w-full h-70" id="comment" placeholder="Your Comment" {...register("comment", { required: "Comment is required" })}></textarea>
+      <div className=" mb-4">
+        <textarea className="placeholder-white border border-white focus:outline-none focus:border-[#FF2A70] focus:ring-0 focus:bg-black bg-black p-4 w-full h-70" id="comment" placeholder="Your Comment" {...register("comment", { required: "Comment is required" })}></textarea>
         {errors.comment && <p className="text-red-500 mt-1">{errors.comment.message}</p>}
       </div>
       <div className="flex justify-end">
