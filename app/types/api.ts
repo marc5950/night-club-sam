@@ -72,16 +72,17 @@ export interface NewsletterSubscription {
 }
 
 // ============================================================================
-// RESERVATION TYPES (BORDBESTILLING)
+// RESERVATIONS TYPES (BORDBESTILLING)
 // ============================================================================
 export interface Reservation {
 	id: number;
 	name: string;
 	email: string;
 	phone: string;
+	table: number; // Ændret fra tableNumber til table
 	date: string; // Format: "YYYY-MM-DD"
-	time: string; // Format: "HH:MM" (24-timers format)
 	guests: number;
+	comment?: string;
 	createdAt?: string;
 }
 

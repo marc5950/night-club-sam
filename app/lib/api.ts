@@ -168,6 +168,8 @@ export const createNewsletterSubscription = (sub: Omit<NewsletterSubscription, "
 // ============================================================================
 // RESERVATIONS
 // ============================================================================
+export const getReservations = () => apiGet<Reservation[]>("/reservations");
+
 export const createReservation = (res: Omit<Reservation, "id" | "createdAt">) => apiPost<Reservation>("/reservations", res);
 
 export const deleteReservation = (id: number) => apiDelete(`/reservations/${id}`);
