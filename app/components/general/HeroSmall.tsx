@@ -2,7 +2,7 @@ import Image from "next/image";
 
 const HeroSmall = ({ title }: { title: string }) => {
   return (
-    <section className='relative w-full h-20 md:h-[272px]'>
+    <section className='relative w-full md:h-[272px]'>
       <Image
         src='/bg/footerbg.jpg'
         alt='Hero Background. Animated people with hands up.'
