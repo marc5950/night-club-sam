@@ -16,7 +16,7 @@ const FormComment = () => {
   };
 
   return (
-    <form className="max-w-[1440px] p-6 mx-auto" onSubmit={handleSubmit(onSubmit)}>
+    <form className="max-w-[1440px] p-6 mx-auto md:ml-42 md:mr-42" onSubmit={handleSubmit(onSubmit)}>
       <h3 className="text-white text-[32px] mb-4 font-bold">LEAVE A COMMENT</h3>
       <div className="grid grid-cols-1 md:grid-cols-2 md:gap-4 mx-auto">
         <div className="mb-4">

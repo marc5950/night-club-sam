@@ -34,25 +34,3 @@ body {
   color: var(--foreground);
   font-family: Ubuntu, Arial;
 }
-
-h1 {
-  color: var(--text-color);
-  font-size: var(--title-h1);
-}
-
-h2 {
-  color: var(--text-color);
-}
-
-h3 {
-  color: var(--text-color);
-}
-
-h4 {
-  color: var(--text-color);
-}
-
-p {
-  color: var(--text-color);
-  font-weight: var(--font-weight-normal);
-}
