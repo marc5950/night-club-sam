@@ -1,11 +1,11 @@
 @import "tailwindcss";
 
 :root {
-  --title-h1: 38px;
-  --title-h2: 38px;
-  --subtitle-h3: 44px;
-  --title-sm: 24px;
-  --p-base: 18px;
+  --title-1: 38px;
+  --title-2: 44px;
+  --title-3: 24px;
+  --p-big: 18px;
+  --p-small: 16px;
   --font-weight-normal: 500;
   --font-weight-bold: 700;
   --text-color: #ffffff;
