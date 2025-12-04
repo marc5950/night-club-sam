@@ -8,6 +8,16 @@ interface BookFormProps {
 	selectedTable: number | null;
 }
 
+interface BookFormData {
+	name: string;
+	email: string;
+	table: number | null;
+	numberOfGuests: number | null;
+	date: string;
+	contactNumber: string;
+	comment: string;
+}
+
 const BookForm = ({ selectedTable }: BookFormProps) => {
 	const [submitStatus, setSubmitStatus] = useState<{ success: boolean; message: string } | null>(null);
 	const {
@@ -18,12 +28,12 @@ const BookForm = ({ selectedTable }: BookFormProps) => {
 		setValue,
 		setError,
 		clearErrors,
-	} = useForm({
+	} = useForm<BookFormData>({
 		defaultValues: {
 			name: "",
 			email: "",
-			table: 0,
-			numberOfGuests: 0,
+			table: null,
+			numberOfGuests: null,
 			date: "",
 			contactNumber: "",
 			comment: "",
@@ -38,16 +48,10 @@ const BookForm = ({ selectedTable }: BookFormProps) => {
 		}
 	}, [selectedTable, setValue, clearErrors]);
 
-	const onSubmit = async (data: {
-		name: string;
-		email: string;
-		table: number;
-		numberOfGuests: number;
-		date: string;
-		contactNumber: string;
-		comment: string;
-	}) => {
+	const onSubmit = async (data: BookFormData) => {
 		setSubmitStatus(null);
+		if (!data.table || !data.numberOfGuests) return;
+
 		try {
 			// 1. Tjek om bordet allerede er booket på den valgte dato
 			const allReservations = await getReservations();
@@ -122,7 +126,10 @@ const BookForm = ({ selectedTable }: BookFormProps) => {
 						className="placeholder-white focus:bg-black text-white bg-black border border-white p-4 w-full focus:outline-none focus:border-[#FF2A70] focus:ring-0"
 						type="number"
 						placeholder="Table Number"
-						{...register("table", { required: "Table number is required" })}
+						{...register("table", {
+							required: "Table number is required",
+							min: { value: 1, message: "Please select a table" },
+						})}
 					/>
 					{errors.table && <p className="text-red-500 mt-1">{errors.table.message}</p>}
 				</div>
@@ -131,7 +138,10 @@ const BookForm = ({ selectedTable }: BookFormProps) => {
 						className="placeholder-white focus:bg-black text-white bg-black border border-white p-4 w-full focus:outline-none focus:border-[#FF2A70] focus:ring-0"
 						type="number"
 						placeholder="Number of Guests"
-						{...register("numberOfGuests", { required: "Number of guests is required" })}
+						{...register("numberOfGuests", {
+							required: "Number of guests is required",
+							min: { value: 1, message: "Must be at least 1 guest" },
+						})}
 					/>
 					{errors.numberOfGuests && <p className="text-red-500 mt-1">{errors.numberOfGuests.message}</p>}
 				</div>
