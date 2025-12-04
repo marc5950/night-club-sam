@@ -1,14 +1,13 @@
 @import "tailwindcss";
 
 :root {
-  --title-1: 38px;
-  --title-2: 44px;
-  --title-3: 24px;
+  --title1: 38px;
+  --title2: 44px;
+  --title3: 24px;
   --p-big: 18px;
   --p-small: 16px;
   --font-weight-normal: 500;
   --font-weight-bold: 700;
-  --text-color: #ffffff;
   --background: #ffffff;
   --foreground: #171717;
   --secondary: #ff2a70;
@@ -33,4 +32,32 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: Ubuntu, Arial;
+}
+
+.font-normal {
+  font-weight: var(--font-weight-normal);
+}
+
+.font-bold {
+  font-weight: var(--font-weight-bold);
+}
+
+.text-title1 {
+  font-size: var(--title1);
+}
+
+.text-title2 {
+  font-size: var(--title2);
+}
+
+.text-title3 {
+  font-size: var(--title3);
+}
+
+.text-p-big {
+  font-size: var(--p-big);
+}
+
+.text-p-small {
+  font-size: var(--p-small);
 }
