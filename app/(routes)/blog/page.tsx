@@ -1,64 +1,58 @@
-import { getBlogPosts, getBlogPostWithComments } from "@/app/lib/api";
+import { getBlogPosts } from "@/app/lib/api";
 import BlogList from "./components/BlogList";
 import HeroSmall from "@/app/components/general/HeroSmall";
 
+// Interface definerer hvilke props denne side kan modtage
+// searchParams er en speciel Next.js prop der indeholder URL parametre (f.eks. ?page=2)
 interface BlogPageProps {
-  searchParams: Promise<{ page?: string }>;
+	searchParams: Promise<{ page?: string }>;
 }
 
 const BlogPage = async ({ searchParams }: BlogPageProps) => {
-  // Await searchParams for at få URL parametre (Next.js 15 requirement)
-  const params = await searchParams;
+	// 1. HENT URL PARAMETRE
+	// Vi skal bruge 'await' fordi searchParams er et Promise i nyeste Next.js
+	const params = await searchParams;
 
-  // Hent side nummer fra URL (default til side 1)
-  // Eksempel: /blog?page=2 giver currentPage = 2
-  const currentPage = parseInt(params.page || "1");
+	// Hvis der står ?page=2 i URL'en, bruger vi det tal. Ellers starter vi på side 1.
+	const currentPage = parseInt(params.page || "1");
 
-  // Hvor mange blogposts vi viser per side
-  const postsPerPage = 3;
+	// 2. KONFIGURATION
+	// Her bestemmer vi hvor mange indlæg der skal vises pr. side
+	const postsPerPage = 3;
 
-  // Hent alle blogposts fra API med kommentarer
-  // Først henter vi grundlæggende post data
-  const basicPosts = await getBlogPosts();
+	// 3. HENT DATA
+	// Vi henter ALLE blogindlæg fra vores API (inklusiv kommentarer)
+	const allPosts = await getBlogPosts();
 
-  // Derefter henter vi hver post med kommentarer inkluderet
-  // Promise.all kører alle requests parallelt for bedre performance
-  const allPosts = await Promise.all(
-    basicPosts.map(async (post) => {
-      // Hent post med kommentarer fra API
-      const postWithComments = await getBlogPostWithComments(post.id);
-      // Hvis API call fejler, brug original post uden kommentarer
-      return postWithComments || post;
-    })
-  );
+	// 4. SORTERING (Nyeste først)
+	// Vi sorterer listen så de nyeste indlæg kommer først i arrayet
+	const sortedPosts = allPosts.sort((a, b) => {
+		const dateA = new Date(a.createdAt || 0).getTime();
+		const dateB = new Date(b.createdAt || 0).getTime();
+		return dateB - dateA; // Positivt tal bytter rækkefølgen -> Descending order
+	});
 
-  // Sorter blogposts så nyeste kommer først
-  const sortedPosts = allPosts.sort((a, b) => {
-    // Konverter dato strings til millisekunder for at kunne sammenligne
-    const dateA = new Date(a.createdAt || 0).getTime();
-    const dateB = new Date(b.createdAt || 0).getTime();
-    // Returner negativ værdi for at sortere nyeste først (descending)
-    return dateB - dateA;
-  });
+	// 5. PAGINATION LOGIK (Matematikken bag siderne)
 
-  // Beregn pagination værdier
-  // Math.ceil runder op så vi får nok sider til alle posts
-  const totalPages = Math.ceil(sortedPosts.length / postsPerPage);
+	// Beregn total antal sider (f.eks. 10 posts / 3 pr. side = 3.33 -> runder op til 4 sider)
+	const totalPages = Math.ceil(sortedPosts.length / postsPerPage);
 
-  // Beregn hvilke posts der skal vises på denne side
-  // Eksempel: Side 2 med 3 posts per side: startIndex = 3, endIndex = 6
-  const startIndex = (currentPage - 1) * postsPerPage;
-  const endIndex = startIndex + postsPerPage;
+	// Find start- og slut-index for den aktuelle side
+	// Side 1: (1-1)*3 = 0  -> Start ved index 0
+	// Side 2: (2-1)*3 = 3  -> Start ved index 3
+	const startIndex = (currentPage - 1) * postsPerPage;
+	const endIndex = startIndex + postsPerPage;
 
-  // Slice array for at få kun de posts der hører til denne side
-  const currentPosts = sortedPosts.slice(startIndex, endIndex);
+	// 'slice' klipper arrayet til, så vi kun får de 3 posts vi skal vise lige nu
+	const currentPosts = sortedPosts.slice(startIndex, endIndex);
 
-  return (
-    <main>
-      <HeroSmall title='Blog' />
-      <BlogList posts={currentPosts} currentPage={currentPage} totalPages={totalPages} />
-    </main>
-  );
+	return (
+		<main>
+			<HeroSmall title="Blog" />
+			{/* Vi sender de udregnede data videre til vores Client Component (BlogList) */}
+			<BlogList posts={currentPosts} currentPage={currentPage} totalPages={totalPages} />
+		</main>
+	);
 };
 
 export default BlogPage;
