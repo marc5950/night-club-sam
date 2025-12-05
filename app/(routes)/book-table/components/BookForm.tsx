@@ -67,7 +67,7 @@ const BookForm = ({ selectedTable }: BookFormProps) => {
 			}
 
 			// 2. Hvis bordet er ledigt, opret reservation
-			await createReservation({
+			const result = await createReservation({
 				name: data.name,
 				email: data.email,
 				phone: data.contactNumber,
@@ -76,6 +76,10 @@ const BookForm = ({ selectedTable }: BookFormProps) => {
 				date: data.date,
 				comment: data.comment,
 			});
+
+			if (!result) {
+				throw new Error("Failed to create reservation");
+			}
 
 			// 3. Vis succes besked og nulstil formular
 			setSubmitStatus({ success: true, message: "Tak for din reservation! Vi glæder os til at se dig." });

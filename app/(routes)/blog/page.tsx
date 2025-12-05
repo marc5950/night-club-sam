@@ -24,6 +24,19 @@ const BlogPage = async ({ searchParams }: BlogPageProps) => {
 	// Vi henter ALLE blogindlæg fra vores API (inklusiv kommentarer)
 	const allPosts = await getBlogPosts();
 
+	// SIKKERHEDSTJEK: Hvis API'et er nede eller der ingen posts er
+	if (!allPosts || allPosts.length === 0) {
+		return (
+			<main>
+				<HeroSmall title="Blog" />
+				<div className="flex flex-col items-center justify-center min-h-[400px] text-white">
+					<h2 className="text-2xl font-bold mb-2">Ingen indlæg fundet</h2>
+					<p className="text-white">Der er ingen blogindlæg at vise lige nu, eller der er ingen forbindelse til serveren.</p>
+				</div>
+			</main>
+		);
+	}
+
 	// 4. SORTERING (Nyeste først)
 	// Vi sorterer listen så de nyeste indlæg kommer først i arrayet
 	const sortedPosts = allPosts.sort((a, b) => {

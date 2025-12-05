@@ -65,7 +65,9 @@ async function apiGet<T>(endpoint: string): Promise<T> {
 		return (await response.json()) as T;
 	} catch (err) {
 		console.error(`API GET Error (${endpoint}):`, err);
-		throw err;
+		// Hvis API'et er nede, returnerer vi et tomt array (hvis T er en liste) eller null
+		// Dette forhindrer appen i at crashe helt
+		return [] as unknown as T;
 	}
 }
 
@@ -81,7 +83,7 @@ async function apiGet<T>(endpoint: string): Promise<T> {
  * - headers: Fortæller serveren at vi sender JSON data
  * - body: JSON.stringify(data): Laver vores JavaScript objekt om til tekst
  */
-async function apiPost<T>(endpoint: string, data: unknown): Promise<T> {
+async function apiPost<T>(endpoint: string, data: unknown): Promise<T | null> {
 	try {
 		const response = await fetch(`${API_BASE_URL}${endpoint}`, {
 			method: "POST",
@@ -92,7 +94,7 @@ async function apiPost<T>(endpoint: string, data: unknown): Promise<T> {
 		return (await response.json()) as T;
 	} catch (err) {
 		console.error(`API POST Error (${endpoint}):`, err);
-		throw err;
+		return null;
 	}
 }
 
