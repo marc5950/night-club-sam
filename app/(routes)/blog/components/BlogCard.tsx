@@ -40,7 +40,7 @@ const BlogCard = ({ post, imagePosition }: BlogCardProps) => {
 			} gap-4  overflow-hidden`}>
 			{/* BILLEDE SEKTION */}
 			<div className="md:w-1/2 relative h-[400px]">
-				<Image src={post.asset.url} alt={post.asset.alt || post.title} fill className="object-cover" unoptimized />
+				<Image src={post.asset.url} alt={post.title} width={960} height={530} className="object-cover" unoptimized />
 			</div>
 
 			{/* TEKST SEKTION */}

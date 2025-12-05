@@ -1,64 +1,102 @@
 "use client";
 import Button from "@/app/components/general/Button";
 import { createReservation, getReservations } from "@/app/lib/api";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+import { z } from "zod";
 
 interface BookFormProps {
 	selectedTable: number | null;
 }
 
-interface BookFormData {
-	name: string;
-	email: string;
-	table: number | null;
-	numberOfGuests: number | null;
-	date: string;
-	contactNumber: string;
-	comment: string;
-}
+// 1. Definer Zod schema (Regler for formularen)
+const schema = z.object({
+	// Navn skal være en tekststreng på mindst 2 tegn
+	name: z.string().min(2, { message: "Navnet skal være mindst 2 bogstaver" }),
+
+	// Email skal være en gyldig email-adresse
+	email: z.string().min(7, { message: "Email er påkrævet" }).email({ message: "Ugyldig email adresse" }),
+
+	// Bordnummer skal være et tal (z.number) og mindst 1
+	table: z.number({ error: "Vælg venligst et bord" }).min(1, { message: "Vælg venligst et bord" }),
+
+	// Antal gæster skal være et tal og mindst 1
+	numberOfGuests: z.number({ error: "Angiv antal gæster" }).min(1, { message: "Der skal være mindst 1 gæst" }),
+
+	// Dato skal være en tekststreng og må ikke være i fortiden
+	date: z
+		.string()
+		.min(1, { message: "Dato er påkrævet" })
+		.refine((dato) => new Date(dato) > new Date(), {
+			message: "Datoen skal være i fremtiden",
+		}),
+
+	// Telefonnummer skal være en tekststreng med kun tal
+	contactNumber: z
+		.string()
+		.min(1, { message: "Telefonnummer er påkrævet" })
+		.regex(/^[0-9]+$/, { message: "Kun tal er tilladt" }),
+
+	// Kommentar er valgfri (optional)
+	comment: z.string().optional(),
+});
+
+// 2. Udled typen fra schemaet
+type BookFormData = z.infer<typeof schema>;
 
 const BookForm = ({ selectedTable }: BookFormProps) => {
+	// State til at håndtere feedback beskeder (succes eller fejl) efter indsendelse
 	const [submitStatus, setSubmitStatus] = useState<{ success: boolean; message: string } | null>(null);
+
+	// useForm hook fra react-hook-form styrer hele formularens tilstand
 	const {
-		register,
-		handleSubmit,
-		formState: { errors, isSubmitting },
-		reset,
-		setValue,
-		setError,
-		clearErrors,
+		register, // Bruges til at registrere input felter i formularen
+		handleSubmit, // Håndterer indsendelse og validering
+		formState: { errors, isSubmitting }, // Indeholder fejl og status (f.eks. om den loader)
+		reset, // Funktion til at nulstille formularen
+		setValue, // Funktion til manuelt at sætte en værdi i et felt
+		setError, // Funktion til manuelt at sætte en fejl på et felt
+		clearErrors, // Funktion til at fjerne fejl fra et felt
 	} = useForm<BookFormData>({
+		// 3. Tilføj resolver: Forbinder Zod schemaet med React Hook Form
+		resolver: zodResolver(schema),
 		defaultValues: {
 			name: "",
 			email: "",
-			table: null,
-			numberOfGuests: null,
+			// Vi bruger undefined for tal, så input feltet er tomt (viser placeholder)
+			table: undefined,
+			numberOfGuests: undefined,
 			date: "",
 			contactNumber: "",
 			comment: "",
 		},
 	});
 
-	// Opdater table i formularen når selectedTable ændres (når man klikker på et bord)
+	// Effekt: Opdater table i formularen når selectedTable ændres (når man klikker på et bord på kortet)
 	useEffect(() => {
 		if (selectedTable) {
+			// Sæt værdien i formularen
 			setValue("table", selectedTable);
+			// Fjern eventuelle fejlbeskeder på feltet, da brugeren lige har valgt et gyldigt bord
 			clearErrors("table");
 		}
 	}, [selectedTable, setValue, clearErrors]);
 
+	// Denne funktion køres KUN hvis Zod valideringen er godkendt
 	const onSubmit = async (data: BookFormData) => {
-		setSubmitStatus(null);
-		if (!data.table || !data.numberOfGuests) return;
+		setSubmitStatus(null); // Nulstil tidligere status beskeder
 
 		try {
 			// 1. Tjek om bordet allerede er booket på den valgte dato
+			// Vi henter alle reservationer for at tjekke mod databasen
 			const allReservations = await getReservations();
 
+			// Tjek om der findes en reservation med samme dato og bordnummer
 			const isTableTaken = allReservations.some((res) => res.date === data.date && Number(res.table) === Number(data.table));
 
 			if (isTableTaken) {
+				// Hvis bordet er optaget, sæt en manuel fejl på 'table' feltet
 				setError("table", {
 					type: "manual",
 					message: "Dette bord er desværre allerede booket denne aften. Vælg venligst et andet bord eller en anden dato.",
@@ -66,7 +104,7 @@ const BookForm = ({ selectedTable }: BookFormProps) => {
 				return; // Stop her, opret ikke reservation
 			}
 
-			// 2. Hvis bordet er ledigt, opret reservation
+			// 2. Hvis bordet er ledigt, opret reservation via API'et
 			const result = await createReservation({
 				name: data.name,
 				email: data.email,
@@ -74,7 +112,7 @@ const BookForm = ({ selectedTable }: BookFormProps) => {
 				table: Number(data.table),
 				guests: Number(data.numberOfGuests),
 				date: data.date,
-				comment: data.comment,
+				comment: data.comment || "",
 			});
 
 			if (!result) {
@@ -83,7 +121,7 @@ const BookForm = ({ selectedTable }: BookFormProps) => {
 
 			// 3. Vis succes besked og nulstil formular
 			setSubmitStatus({ success: true, message: "Tak for din reservation! Vi glæder os til at se dig." });
-			reset();
+			reset(); // Tøm felterne
 		} catch (error) {
 			console.error("Error submitting form:", error);
 			setSubmitStatus({ success: false, message: "Der skete en fejl ved reservationen. Prøv venligst igen." });
@@ -92,90 +130,90 @@ const BookForm = ({ selectedTable }: BookFormProps) => {
 
 	return (
 		<form className="max-w-[1440px] p-6 mx-auto" onSubmit={handleSubmit(onSubmit)}>
+			{/* --- 1. Formular Overskrift --- */}
 			<h3 className="text-primary text-[32px] mb-4 font-bold">BOOK A TABLE</h3>
 
-			{/* Feedback besked (Succes eller generel fejl) */}
+			{/* --- 2. Feedback Besked (Succes eller Fejl) --- */}
+			{/* Vises kun hvis der er en status besked fra onSubmit */}
 			{submitStatus && (
 				<div className={`p-4 mb-6 rounded ${submitStatus.success ? "bg-green-800 text-primary" : "bg-red-800 text-primary"}`}>
 					{submitStatus.message}
 				</div>
 			)}
 
+			{/* --- 3. Input Felter (Grid Layout) --- */}
 			<div className="grid grid-cols-1 md:grid-cols-2 md:gap-4 mx-auto">
+				{/* Navn Felt */}
 				<div className="mb-4">
 					<input
 						className="text-primary focus:bg-background bg-background border border-primary placeholder-primary p-4 w-full focus:outline-none focus:border-[#FF2A70] focus:ring-0"
 						id="name"
 						placeholder="Your Name"
-						{...register("name", { required: "Name is required" })}
+						{...register("name")} // Forbinder inputtet med Zod schemaet 'name'
 					/>
+					{/* Vis fejlbesked hvis validering fejler */}
 					{errors.name && <p className="text-red-500 mt-1">{errors.name.message}</p>}
 				</div>
+
+				{/* Email Felt */}
 				<div className="mb-4">
 					<input
 						className="text-primary focus:bg-background bg-background border border-primary placeholder-primary p-4 w-full focus:outline-none focus:border-[#FF2A70] focus:ring-0"
 						id="email"
 						type="email"
 						placeholder="Your Email"
-						{...register("email", {
-							required: "Email is required",
-							pattern: {
-								value: /^\S+@\S+$/i,
-								message: "Invalid email address",
-							},
-						})}
+						{...register("email")}
 					/>
 					{errors.email && <p className="text-red-500 mt-1">{errors.email.message}</p>}
 				</div>
+
+				{/* Bordnummer Felt */}
 				<div className="mb-4">
+					{/* Vi bruger valueAsNumber: true for at sikre at inputtet bliver sendt som et tal til Zod. */}
 					<input
 						className="placeholder-primary focus:bg-background text-primary bg-background border border-primary p-4 w-full focus:outline-none focus:border-[#FF2A70] focus:ring-0"
 						type="number"
 						placeholder="Table Number"
-						{...register("table", {
-							required: "Table number is required",
-							min: { value: 1, message: "Please select a table" },
-						})}
+						{...register("table", { valueAsNumber: true })}
 					/>
 					{errors.table && <p className="text-red-500 mt-1">{errors.table.message}</p>}
 				</div>
+
+				{/* Antal Gæster Felt */}
 				<div className="mb-4">
 					<input
 						className="placeholder-primary focus:bg-background text-primary bg-background border border-primary p-4 w-full focus:outline-none focus:border-[#FF2A70] focus:ring-0"
 						type="number"
 						placeholder="Number of Guests"
-						{...register("numberOfGuests", {
-							required: "Number of guests is required",
-							min: { value: 1, message: "Must be at least 1 guest" },
-						})}
+						{...register("numberOfGuests", { valueAsNumber: true })}
 					/>
 					{errors.numberOfGuests && <p className="text-red-500 mt-1">{errors.numberOfGuests.message}</p>}
 				</div>
+
+				{/* Dato Vælger */}
 				<div className="mb-4">
 					<input
 						className="placeholder-primary focus:bg-background text-primary bg-background border border-primary p-4 w-full focus:outline-none focus:border-[#FF2A70] focus:ring-0"
 						type="date"
 						placeholder="Select Date"
-						{...register("date", { required: "Date is required" })}
+						{...register("date")}
 					/>
 					{errors.date && <p className="text-red-500 mt-1">{errors.date.message}</p>}
 				</div>
+
+				{/* Telefonnummer Felt */}
 				<div className="mb-4">
 					<input
 						className="placeholder-primary text-primary bg-background border-primary border p-4 w-full focus:bg-background focus:outline-none focus:border-[#FF2A70] focus:ring-0"
 						type="text"
 						placeholder="Your Contact Number"
-						{...register("contactNumber", {
-							required: "Contact number is required",
-							pattern: {
-								value: /^[0-9]+$/,
-								message: "Only numbers are allowed",
-							},
-						})}
+						{...register("contactNumber")}
 					/>
 					{errors.contactNumber && <p className="text-red-500 mt-1">{errors.contactNumber.message}</p>}
 				</div>
 			</div>
+
+			{/* --- 4. Kommentar Felt (Textarea) --- */}
 			<div className="mb-4">
 				<textarea
 					className="placeholder-primary border border-primary focus:outline-none focus:border-[#FF2A70] focus:ring-0 focus:bg-background bg-background p-4 w-full h-70"
@@ -184,7 +222,10 @@ const BookForm = ({ selectedTable }: BookFormProps) => {
 					{...register("comment")}></textarea>
 				{errors.comment && <p className="text-red-500 mt-1">{errors.comment.message}</p>}
 			</div>
+
+			{/* --- 5. Indsend Knap --- */}
 			<div className="flex justify-end">
+				{/* Knappen viser "Reserving..." mens formularen indsendes (isSubmitting er true) */}
 				<Button text={isSubmitting ? "Reserving..." : "Reserve"} />
 			</div>
 		</form>
