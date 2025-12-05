@@ -7,8 +7,10 @@ interface BlogCardProps {
 }
 
 const BlogExample = ({ post }: BlogCardProps) => {
+  // Antal kommentarer (fallback til 0 hvis ingen)
   const commentCount = post.comments?.length || 0;
 
+  // Formater dato til dansk visning
   const formattedDate = post.createdAt
     ? new Date(post.createdAt).toLocaleDateString("da-DK", {
         day: "numeric",
@@ -19,11 +21,14 @@ const BlogExample = ({ post }: BlogCardProps) => {
 
   return (
     <article className='cursor-pointer'>
+      {/* Blog billede */}
       <Image src={post.asset.url} alt={post.asset.alt || post.title || ""} fill className='object-cover' unoptimized />
       <h2 className='text-background text-title3 font-normal uppercase'>{post.title}</h2>
+      {/* Meta information: forfatter, antal kommentarer, dato */}
       <p className='text-secondary mt-2 mb-6 text-p-big font-normal'>
-        By: {post.author} /{commentCount} {commentCount === 1 ? "kommentar" : "kommentarer"} / {formattedDate}
+        By: {post.author} / {commentCount} {commentCount === 1 ? "kommentar" : "kommentarer"} / {formattedDate}
       </p>
+      {/* Kort preview af indholdet (første 20 ord). Tilføjer ... til sidst */}
       <p className='text-background'>{post.content.split(" ").slice(0, 20).join(" ")}...</p>
     </article>
   );
