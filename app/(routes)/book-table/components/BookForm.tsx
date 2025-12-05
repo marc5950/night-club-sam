@@ -92,17 +92,19 @@ const BookForm = ({ selectedTable }: BookFormProps) => {
 
 	return (
 		<form className="max-w-[1440px] p-6 mx-auto" onSubmit={handleSubmit(onSubmit)}>
-			<h3 className="text-white text-[32px] mb-4 font-bold">BOOK A TABLE</h3>
+			<h3 className="text-primary text-[32px] mb-4 font-bold">BOOK A TABLE</h3>
 
 			{/* Feedback besked (Succes eller generel fejl) */}
 			{submitStatus && (
-				<div className={`p-4 mb-6 rounded ${submitStatus.success ? "bg-green-800 text-white" : "bg-red-800 text-white"}`}>{submitStatus.message}</div>
+				<div className={`p-4 mb-6 rounded ${submitStatus.success ? "bg-green-800 text-primary" : "bg-red-800 text-primary"}`}>
+					{submitStatus.message}
+				</div>
 			)}
 
 			<div className="grid grid-cols-1 md:grid-cols-2 md:gap-4 mx-auto">
 				<div className="mb-4">
 					<input
-						className="text-white focus:bg-black bg-black border border-white placeholder-white p-4 w-full focus:outline-none focus:border-[#FF2A70] focus:ring-0"
+						className="text-primary focus:bg-background bg-background border border-primary placeholder-primary p-4 w-full focus:outline-none focus:border-[#FF2A70] focus:ring-0"
 						id="name"
 						placeholder="Your Name"
 						{...register("name", { required: "Name is required" })}
@@ -111,7 +113,7 @@ const BookForm = ({ selectedTable }: BookFormProps) => {
 				</div>
 				<div className="mb-4">
 					<input
-						className="text-white focus:bg-black bg-black border border-white placeholder-white p-4 w-full focus:outline-none focus:border-[#FF2A70] focus:ring-0"
+						className="text-primary focus:bg-background bg-background border border-primary placeholder-primary p-4 w-full focus:outline-none focus:border-[#FF2A70] focus:ring-0"
 						id="email"
 						type="email"
 						placeholder="Your Email"
@@ -127,7 +129,7 @@ const BookForm = ({ selectedTable }: BookFormProps) => {
 				</div>
 				<div className="mb-4">
 					<input
-						className="placeholder-white focus:bg-black text-white bg-black border border-white p-4 w-full focus:outline-none focus:border-[#FF2A70] focus:ring-0"
+						className="placeholder-primary focus:bg-background text-primary bg-background border border-primary p-4 w-full focus:outline-none focus:border-[#FF2A70] focus:ring-0"
 						type="number"
 						placeholder="Table Number"
 						{...register("table", {
@@ -139,7 +141,7 @@ const BookForm = ({ selectedTable }: BookFormProps) => {
 				</div>
 				<div className="mb-4">
 					<input
-						className="placeholder-white focus:bg-black text-white bg-black border border-white p-4 w-full focus:outline-none focus:border-[#FF2A70] focus:ring-0"
+						className="placeholder-primary focus:bg-background text-primary bg-background border border-primary p-4 w-full focus:outline-none focus:border-[#FF2A70] focus:ring-0"
 						type="number"
 						placeholder="Number of Guests"
 						{...register("numberOfGuests", {
@@ -151,7 +153,7 @@ const BookForm = ({ selectedTable }: BookFormProps) => {
 				</div>
 				<div className="mb-4">
 					<input
-						className="placeholder-white focus:bg-black text-white bg-black border border-white p-4 w-full focus:outline-none focus:border-[#FF2A70] focus:ring-0"
+						className="placeholder-primary focus:bg-background text-primary bg-background border border-primary p-4 w-full focus:outline-none focus:border-[#FF2A70] focus:ring-0"
 						type="date"
 						placeholder="Select Date"
 						{...register("date", { required: "Date is required" })}
@@ -160,7 +162,7 @@ const BookForm = ({ selectedTable }: BookFormProps) => {
 				</div>
 				<div className="mb-4">
 					<input
-						className="placeholder-white text-white bg-black border-white border p-4 w-full focus:bg-black focus:outline-none focus:border-[#FF2A70] focus:ring-0"
+						className="placeholder-primary text-primary bg-background border-primary border p-4 w-full focus:bg-background focus:outline-none focus:border-[#FF2A70] focus:ring-0"
 						type="text"
 						placeholder="Your Contact Number"
 						{...register("contactNumber", {
@@ -176,7 +178,7 @@ const BookForm = ({ selectedTable }: BookFormProps) => {
 			</div>
 			<div className="mb-4">
 				<textarea
-					className="placeholder-white border border-white focus:outline-none focus:border-[#FF2A70] focus:ring-0 focus:bg-black bg-black p-4 w-full h-70"
+					className="placeholder-primary border border-primary focus:outline-none focus:border-[#FF2A70] focus:ring-0 focus:bg-background bg-background p-4 w-full h-70"
 					id="comment"
 					placeholder="Your Comment"
 					{...register("comment")}></textarea>

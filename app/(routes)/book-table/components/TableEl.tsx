@@ -17,7 +17,7 @@ const TableEl = ({ tableType, table, onSelect }: TableElProps) => {
 				width={100}
 				height={100}
 			/>
-			<p className="col-start-1 row-start-1 z-10 font-bold text-white text-xl pointer-events-none">{table}</p>
+			<p className="col-start-1 row-start-1 z-10 font-bold text-primary text-xl pointer-events-none">{table}</p>
 		</div>
 	);
 };

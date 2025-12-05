@@ -23,7 +23,7 @@ const BlogList = ({ posts, currentPage, totalPages }: BlogListProps) => {
 	};
 
 	return (
-		<section className="bg-black py-16">
+		<section className="py-16">
 			<div className="">
 				{/* LISTE AF BLOG INDLÆG */}
 				<div className="max-w-6xl mx-auto">
@@ -43,7 +43,7 @@ const BlogList = ({ posts, currentPage, totalPages }: BlogListProps) => {
 						<button
 							onClick={() => handlePageChange(currentPage - 1)}
 							disabled={currentPage === 1} // Deaktiver knappen hvis vi er på side 1
-							className="px-6 py-2 text-white lowercase font-bold tracking-wider disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer hover:bg-secondary transition-colors">
+							className="px-6 py-2 text-primary lowercase font-bold tracking-wider disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer hover:bg-secondary transition-colors">
 							{"<"} Tilbage
 						</button>
 
@@ -56,7 +56,7 @@ const BlogList = ({ posts, currentPage, totalPages }: BlogListProps) => {
 									onClick={() => handlePageChange(page)}
 									// Hvis knappen er den side vi er på nu, giv den en understregning
 									className={`w-10 h-10 flex cursor-pointer items-center justify-center font-bold ${
-										page === currentPage ? "underline text-white" : "text-white"
+										page === currentPage ? "underline text-primary" : "text-primary"
 									} transition-colors`}>
 									{page}
 								</button>
@@ -67,7 +67,7 @@ const BlogList = ({ posts, currentPage, totalPages }: BlogListProps) => {
 						<button
 							onClick={() => handlePageChange(currentPage + 1)}
 							disabled={currentPage === totalPages} // Deaktiver hvis vi er på sidste side
-							className="px-6 py-2 text-white cursor-pointer lowercase font-bold tracking-wider disabled:opacity-50 disabled:cursor-not-allowed hover:bg-secondary transition-colors">
+							className="px-6 py-2 text-primary cursor-pointer lowercase font-bold tracking-wider disabled:opacity-50 disabled:cursor-not-allowed hover:bg-secondary transition-colors">
 							Næste {">"}
 						</button>
 					</div>

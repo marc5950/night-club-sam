@@ -29,9 +29,9 @@ const BlogPage = async ({ searchParams }: BlogPageProps) => {
 		return (
 			<main>
 				<HeroSmall title="Blog" />
-				<div className="flex flex-col items-center justify-center min-h-[400px] text-white">
+				<div className="flex flex-col items-center justify-center min-h-[400px] text-primary">
 					<h2 className="text-2xl font-bold mb-2">Ingen indlæg fundet</h2>
-					<p className="text-white">Der er ingen blogindlæg at vise lige nu, eller der er ingen forbindelse til serveren.</p>
+					<p className="text-primary">Der er ingen blogindlæg at vise lige nu, eller der er ingen forbindelse til serveren.</p>
 				</div>
 			</main>
 		);

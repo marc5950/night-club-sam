@@ -19,7 +19,7 @@ const Header = () => {
 	};
 
 	return (
-		<header className="relative bg-black">
+		<header className="bg-background relative">
 			{/* Top-left corner */}
 			<div className="absolute top-0 left-0 w-0 h-0 border-r-30 border-r-transparent border-t-30 border-t-secondary"></div>
 
@@ -35,7 +35,7 @@ const Header = () => {
 						<li className="min-w-12">
 							<Link
 								href="/"
-								className={`transition-colors flex flex-col items-center ${isActive("/") ? "text-secondary" : "text-white hover:text-secondary"}`}>
+								className={`transition-colors flex flex-col items-center ${isActive("/") ? "text-secondary" : "text-primary hover:text-secondary"}`}>
 								Home
 								<Image src="/bottom_line2.png" alt="Underline" width={48} height={2} className={`mt-1 ${isActive("/") ? "block" : "hidden"}`} />
 							</Link>
@@ -43,7 +43,7 @@ const Header = () => {
 						<li className="min-w-12">
 							<Link
 								href="/blog"
-								className={`transition-colors flex flex-col items-center ${isActive("/blog") ? "text-secondary" : "text-white hover:text-secondary"}`}>
+								className={`transition-colors flex flex-col items-center ${isActive("/blog") ? "text-secondary" : "text-primary hover:text-secondary"}`}>
 								Blog
 								<Image src="/bottom_line2.png" alt="Underline" width={48} height={2} className={`mt-1 ${isActive("/blog") ? "block" : "hidden"}`} />
 							</Link>
@@ -51,7 +51,7 @@ const Header = () => {
 						<li className="min-w-12">
 							<Link
 								href="/book-table"
-								className={`transition-colors flex flex-col items-center ${isActive("/book-table") ? "text-secondary" : "text-white hover:text-secondary"}`}>
+								className={`transition-colors flex flex-col items-center ${isActive("/book-table") ? "text-secondary" : "text-primary hover:text-secondary"}`}>
 								Book table
 								<Image
 									src="/bottom_line2.png"
@@ -65,7 +65,7 @@ const Header = () => {
 						<li className="min-w-12">
 							<Link
 								href="/contact-us"
-								className={`transition-colors flex flex-col items-center ${isActive("/contact-us") ? "text-secondary" : "text-white hover:text-secondary"}`}>
+								className={`transition-colors flex flex-col items-center ${isActive("/contact-us") ? "text-secondary" : "text-primary hover:text-secondary"}`}>
 								Contact us
 								<Image
 									src="/bottom_line2.png"
@@ -85,7 +85,7 @@ const Header = () => {
 				<Link href="/">
 					<Image src="/icon/Logo_main.svg" alt="Night Club Logo" width={189} height={46} />
 				</Link>
-				<button onClick={toggleMenu} className="text-white text-3xl cursor-pointer">
+				<button onClick={toggleMenu} className="text-primary text-3xl cursor-pointer">
 					<RiMenu3Line />
 				</button>
 			</div>
@@ -97,13 +97,13 @@ const Header = () => {
 				} md:hidden`}>
 				<div className="flex flex-col items-center justify-center h-full relative">
 					{/* Close button */}
-					<button onClick={toggleMenu} className="cursor-pointer absolute top-4 right-4 text-white text-4xl">
+					<button onClick={toggleMenu} className="cursor-pointer absolute top-4 right-4 text-primary text-4xl">
 						<RiCloseLine />
 					</button>
 
 					{/* Menu Items */}
 					<nav className="relative z-10">
-						<ol className="flex flex-col gap-8 text-center uppercase text-white text-xl">
+						<ol className="flex flex-col gap-8 text-center uppercase text-primary text-xl">
 							<li>
 								<Link
 									href="/"

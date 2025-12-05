@@ -49,14 +49,14 @@ const Footer = () => {
 						<Image src="/icon/Logo_main.svg" alt="Night Club Logo" width={228} height={54} />
 						<div>
 							<h2 className="uppercase text-secondary font-bold mb-2 text-2xl">Location</h2>
-							<p className="text-white text-lg">
+							<p className="text-primary text-lg">
 								Kompagnistræde 278 <br /> 1265 København K
 							</p>
 						</div>
 						<div>
 							<h2 className="uppercase text-secondary font-bold mb-2 text-2xl">Opening Hours</h2>
-							<p className="text-white text-lg">WED - THU: 10:30 PM TO 3 AM</p>
-							<p className="text-white text-lg">SAT - SUN: 11 PM TO 5 AM</p>
+							<p className="text-primary text-lg">WED - THU: 10:30 PM TO 3 AM</p>
+							<p className="text-primary text-lg">SAT - SUN: 11 PM TO 5 AM</p>
 						</div>
 					</div>
 
@@ -68,7 +68,7 @@ const Footer = () => {
 								<div key={post.id} className="flex gap-3">
 									<Image src={post.image} alt={post.title} width={80} height={80} className="object-cover" />
 									<div className="flex flex-col gap-2">
-										<h3 className="text-white text-lg font-medium">{post.title}</h3>
+										<h3 className="text-primary text-lg font-medium">{post.title}</h3>
 										<p className="text-secondary text-base">{post.date}</p>
 									</div>
 								</div>
@@ -84,7 +84,7 @@ const Footer = () => {
 								<div key={tweet.id} className="flex gap-3">
 									<FaTwitter className="text-secondary text-xl shrink-0 mt-1" />
 									<div>
-										<p className="text-white text-lg">{tweet.text}</p>
+										<p className="text-primary text-lg">{tweet.text}</p>
 										<p className="text-secondary text-base mt-1">{tweet.time}</p>
 									</div>
 								</div>
@@ -94,16 +94,16 @@ const Footer = () => {
 				</div>
 				{/* Copy right */}
 				<div className="flex flex-col md:flex-row justify-between  md:items-end gap-6 items-center">
-					<p className="text-lg max-w-[250px] text-white">Night Club PSD Template - All rights reserved.</p>
+					<p className="text-lg max-w-[250px] text-primary">Night Club PSD Template - All rights reserved.</p>
 					<div className="flex flex-col items-center">
-						<h3 className="text-lg text-white">Stay Connected With Us</h3>
-						<div className="flex gap-4 mt-2 text-white">
-							<FaFacebookF className="border cursor-pointer border-white p-2 h-12 w-12" />
-							<FaSnapchatGhost className="border cursor-pointer border-white p-2 h-12 w-12" />
-							<FaInstagram className="border cursor-pointer border-white p-2 h-12 w-12" />
+						<h3 className="text-lg text-primary">Stay Connected With Us</h3>
+						<div className="flex gap-4 mt-2 text-primary">
+							<FaFacebookF className="border cursor-pointer border-primary p-2 h-12 w-12" />
+							<FaSnapchatGhost className="border cursor-pointer border-primary p-2 h-12 w-12" />
+							<FaInstagram className="border cursor-pointer border-primary p-2 h-12 w-12" />
 						</div>
 					</div>
-					<p className="text-lg max-w-[250px] text-end text-white">Copyright &copy; {new Date().getFullYear()} NightClub</p>
+					<p className="text-lg max-w-[250px] text-end text-primary">Copyright &copy; {new Date().getFullYear()} NightClub</p>
 				</div>
 			</div>
 		</footer>
