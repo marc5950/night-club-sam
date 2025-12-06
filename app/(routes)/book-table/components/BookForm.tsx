@@ -4,46 +4,11 @@ import { createReservation, getReservations } from "@/app/lib/api";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { z } from "zod";
+import { BookFormData, schema } from "../schema";
 
 interface BookFormProps {
 	selectedTable: number | null;
 }
-
-// 1. Definer Zod schema (Regler for formularen)
-const schema = z.object({
-	// Navn skal være en tekststreng på mindst 2 tegn
-	name: z.string().min(2, { message: "Navnet skal være mindst 2 bogstaver" }),
-
-	// Email skal være en gyldig email-adresse
-	email: z.string().min(7, { message: "Email er påkrævet" }).email({ message: "Ugyldig email adresse" }),
-
-	// Bordnummer skal være et tal (z.number) og mindst 1
-	table: z.number({ error: "Vælg venligst et bord" }).min(1, { message: "Vælg venligst et bord" }),
-
-	// Antal gæster skal være et tal og mindst 1
-	numberOfGuests: z.number({ error: "Angiv antal gæster" }).min(1, { message: "Der skal være mindst 1 gæst" }),
-
-	// Dato skal være en tekststreng og må ikke være i fortiden
-	date: z
-		.string()
-		.min(1, { message: "Dato er påkrævet" })
-		.refine((dato) => new Date(dato) > new Date(), {
-			message: "Datoen skal være i fremtiden",
-		}),
-
-	// Telefonnummer skal være en tekststreng med kun tal
-	contactNumber: z
-		.string()
-		.min(1, { message: "Telefonnummer er påkrævet" })
-		.regex(/^[0-9]+$/, { message: "Kun tal er tilladt" }),
-
-	// Kommentar er valgfri (optional)
-	comment: z.string().optional(),
-});
-
-// 2. Udled typen fra schemaet
-type BookFormData = z.infer<typeof schema>;
 
 const BookForm = ({ selectedTable }: BookFormProps) => {
 	// State til at håndtere feedback beskeder (succes eller fejl) efter indsendelse
@@ -89,7 +54,8 @@ const BookForm = ({ selectedTable }: BookFormProps) => {
 
 		try {
 			// 1. Tjek om bordet allerede er booket på den valgte dato
-			// Vi henter alle reservationer for at tjekke mod databasen
+			// Vi gør dette tjek her i onSubmit (og ikke i Zod), fordi det kræver et API-kald.
+			// Hvis vi lagde det i Zod, ville den hente alle reservationer hver gang brugeren ændrer datoen, hvilket ville gøre formularen langsom.
 			const allReservations = await getReservations();
 
 			// Tjek om der findes en reservation med samme dato og bordnummer

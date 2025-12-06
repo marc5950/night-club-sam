@@ -3,6 +3,7 @@ import Image from "next/image";
 interface TableElProps {
 	tableType: string;
 	table: number;
+	seats: number;
 	onSelect: () => void;
 }
 

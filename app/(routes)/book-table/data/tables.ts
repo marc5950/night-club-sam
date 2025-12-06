@@ -1,0 +1,17 @@
+export const tables = [
+	{ id: 1, seats: 4, type: "table1.svg" },
+	{ id: 2, seats: 4, type: "table1.svg" },
+	{ id: 3, seats: 6, type: "table2.svg" },
+	{ id: 4, seats: 4, type: "table1.svg" },
+	{ id: 5, seats: 8, type: "table3.svg" },
+	{ id: 6, seats: 4, type: "table1.svg" },
+	{ id: 7, seats: 4, type: "table1.svg" },
+	{ id: 8, seats: 6, type: "table2.svg" },
+	{ id: 9, seats: 4, type: "table1.svg" },
+	{ id: 10, seats: 8, type: "table3.svg" },
+	{ id: 11, seats: 4, type: "table1.svg" },
+	{ id: 12, seats: 4, type: "table1.svg" },
+	{ id: 13, seats: 6, type: "table2.svg" },
+	{ id: 14, seats: 4, type: "table1.svg" },
+	{ id: 15, seats: 8, type: "table3.svg" },
+];
