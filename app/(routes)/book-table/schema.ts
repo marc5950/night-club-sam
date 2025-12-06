@@ -8,7 +8,7 @@ export const schema = z
 		name: z.string().min(2, { message: "Navnet skal være mindst 2 bogstaver" }),
 
 		// Email skal være en gyldig email-adresse
-		email: z.string().min(7, { message: "Email er påkrævet" }).email({ message: "Ugyldig email adresse" }),
+		email: z.string().min(7, { message: "Angiv venligst din email" }).email({ message: "Ugyldig email adresse" }),
 
 		// Bordnummer skal være et tal (z.number) og mindst 1
 		table: z.number({ error: "Vælg venligst et bord" }).min(1, { message: "Vælg venligst et bord" }),
@@ -20,7 +20,7 @@ export const schema = z
 		// Dato skal være en tekststreng og må ikke være i fortiden
 		date: z
 			.string()
-			.min(1, { message: "Dato er påkrævet" })
+			.min(1, { message: "Vælg venligst en dato" })
 			.refine((dato) => new Date(dato) > new Date(), {
 				message: "Datoen skal være i fremtiden",
 			}),
@@ -28,8 +28,8 @@ export const schema = z
 		// Telefonnummer skal være en tekststreng med kun tal
 		contactNumber: z
 			.string()
-			.min(1, { message: "Telefonnummer er påkrævet" })
-			.regex(/^[0-9]+$/, { message: "Kun tal er tilladt" }),
+			.min(1, { message: "Angiv venligst dit telefonnummer" })
+			.regex(/^[0-9]+$/, { message: "Skriv kun tal" }),
 
 		// Kommentar er valgfri (optional)
 		comment: z.string().optional(),
