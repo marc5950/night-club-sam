@@ -14,7 +14,7 @@ const CommentEl = ({ comments }: CommentElProps) => {
   }
 
   return (
-    <div className="max-w-[1440px] mx-auto p-6">
+    <div className="max-w-[1440px] md:ml-42 mx-auto pl-4">
       {comments.map((comment) => (
         <div key={comment.id}>
           <p className="text-primary font-bold mb-2">
