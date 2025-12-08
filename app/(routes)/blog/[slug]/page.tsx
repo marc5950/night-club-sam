@@ -3,6 +3,7 @@ import BlogPost from "./components/BlogPost";
 import HeroSmall from "@/app/components/general/HeroSmall";
 
 import { getBlogPosts, getBlogPostWithComments } from "@/app/lib/api";
+import CommentEl from "./components/CommentEl";
 
 interface PageProps {
   params: Promise<{
@@ -28,6 +29,7 @@ const blogPostSingleView = async ({ params }: PageProps) => {
       <HeroSmall title="Blog Post" />
       {/* <h1>Blog Post</h1> */}
       <BlogPost post={postWithComments} />
+      <CommentEl comments={postWithComments.comments || []} />
       <FormComment blogpostId={post.id} />
     </main>
   );
