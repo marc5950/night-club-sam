@@ -28,7 +28,7 @@ const blogPostSingleView = async ({ params }: PageProps) => {
       <HeroSmall title="Blog Post" />
       {/* <h1>Blog Post</h1> */}
       <BlogPost post={postWithComments} />
-      <FormComment />
+      <FormComment blogpostId={post.id} />
     </main>
   );
 };
