@@ -4,8 +4,7 @@ import ContactForm from "./components/ContactForm";
 const contactUs = () => {
   return (
     <main>
-      <HeroSmall title='Contact us' />
-      <h1>Contact Us</h1>
+      <HeroSmall title="Contact us" />
       <ContactForm />
     </main>
   );
