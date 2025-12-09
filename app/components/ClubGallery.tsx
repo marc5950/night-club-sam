@@ -7,7 +7,7 @@ const ClubGallery = async () => {
   const limitedPhotos = photos.slice(0, 7);
 
   return (
-    <div className="max-w-[1440px]">
+    <div className="w-full">
       {/* GRID: 4 billeder top + 3 billeder bund */}
       <div className="grid grid-cols-1 md:grid-cols-5">
         {/* --- ØVERSTE RÆKKE (4 billeder) --- */}
