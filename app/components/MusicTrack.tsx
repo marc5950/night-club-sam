@@ -57,18 +57,6 @@ const MusicTrack = () => {
     setDuration(audioRef.current.duration);
   };
 
-  const handleTrackChange = () => {
-    if (!audioRef.current) return;
-    audioRef.current.pause();
-    audioRef.current.load();
-    audioRef.current.play();
-    setIsPlaying(true);
-  };
-
-  useEffect(() => {
-    handleTrackChange();
-  }, [currentTrackIndex]);
-
   // Format tid som mm:ss
   const formatTime = (time: number) => {
     if (isNaN(time)) return "0:00";
@@ -95,7 +83,7 @@ const MusicTrack = () => {
           type="range"
           className="flex-1 h-1 custom-range"
           max={100}
-          value={progress}
+          value={isNaN(progress) ? 0 : progress}
           onChange={(e) => {
             if (!audioRef.current) return;
             const newTime = (Number(e.target.value) / 100) * audioRef.current.duration;
@@ -133,7 +121,7 @@ const MusicTrack = () => {
           <FaVolumeUp className="text-primary text-2xl" />
           <input
             type="range"
-            className="flex-1 h-1 custom-range w-6"
+            className="flex-1 h-1 custom-range w-18"
             min={0}
             max={1}
             step={0.01}
