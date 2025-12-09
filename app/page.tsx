@@ -14,6 +14,7 @@ export default function Home() {
         <WelcomeInNightclub />
         <ClubGallery />
         <VideoCard />
+        <TestimonialList />
         <BlogRecent />
         <Newsletter />
       </main>
