@@ -24,11 +24,21 @@ const TestimonialList = () => {
     fetchData();
   }, []);
 
+  if (testimonialData.length === 0) {
+    return (
+      <section className='max-w-6xl mx-auto p-8 mt-20'>
+        <p>Loading testimonials...</p>
+      </section>
+    );
+  }
+
+  const activePost = testimonialData[activeIndex];
+
   return (
     <section className='max-w-6xl mx-auto p-8 mt-20 mb-20'>
       {/* Viser den aktive testimonial baseret på activeIndex */}
       {/* Hvis activeIndex = 0, så vis testimonialData[0] */}
-      <TestimonialCard post={testimonialData[activeIndex]} />
+      <TestimonialCard post={activePost} />
       {/* ScrollBar komponent til at skifte mellem testimonials */}
       <ScrollBar active={activeIndex} onSelect={setActiveIndex} activeColor='bg-secondary' color='bg-white' />
     </section>
