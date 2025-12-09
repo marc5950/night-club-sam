@@ -3,17 +3,19 @@ import WelcomeInNightclub from "./components/welcome-in-nightclub/WelcomeInNight
 import Newsletter from "./components/Newsletter";
 import BlogRecent from "./components/recent-blog/BlogRecent";
 import VideoCard from "./components/VideoCard";
+import ClubGallery from "./components/ClubGallery";
 
 export default function Home() {
-	return (
-		<div>
-			<main>
-				<Hero />
-				<WelcomeInNightclub />
-				<VideoCard />
-				<BlogRecent />
-				<Newsletter />
-			</main>
-		</div>
-	);
+  return (
+    <div>
+      <main>
+        <Hero />
+        <WelcomeInNightclub />
+        <ClubGallery />
+        <VideoCard />
+        <BlogRecent />
+        <Newsletter />
+      </main>
+    </div>
+  );
 }

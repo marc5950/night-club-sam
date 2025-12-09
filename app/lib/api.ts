@@ -157,7 +157,7 @@ export const sendContactMessage = (message: Omit<ContactMessage, "id" | "created
 // ============================================================================
 // GALLERY
 // ============================================================================
-export const getGalleryPhotos = () => apiGet<GalleryPhoto[]>("/gallery-photos");
+export const getGalleryPhotos = () => apiGet<GalleryPhoto[]>("/gallery");
 
 // ============================================================================
 // NEWSLETTER
