@@ -4,6 +4,7 @@ import Newsletter from "./components/Newsletter";
 import BlogRecent from "./components/recent-blog/BlogRecent";
 import VideoCard from "./components/VideoCard";
 import ClubGallery from "./components/ClubGallery";
+import MusicTrack from "./components/MusicTrack";
 
 export default function Home() {
   return (
@@ -12,6 +13,7 @@ export default function Home() {
         <Hero />
         <WelcomeInNightclub />
         <ClubGallery />
+        <MusicTrack />
         <VideoCard />
         <BlogRecent />
         <Newsletter />
