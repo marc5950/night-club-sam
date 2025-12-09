@@ -18,8 +18,8 @@ const BlogCard = ({ post, imagePosition }: BlogCardProps) => {
 
 	// 2. FORMATER DATO
 	// Vi laver dato-strengen om til et pænt dansk format (f.eks. "2. december 2025")
-	const formattedDate = post.createdAt
-		? new Date(post.createdAt).toLocaleDateString("da-DK", {
+	const formattedDate = post.date
+		? new Date(post.date).toLocaleDateString("da-DK", {
 				day: "numeric",
 				month: "long",
 				year: "numeric",

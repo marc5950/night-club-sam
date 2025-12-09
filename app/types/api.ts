@@ -21,6 +21,7 @@ export interface BlogPost {
 	author: string;
 	content: string;
 	slug?: string;
+	date?: string;
 	createdAt?: string;
 	updatedAt?: string;
 	asset: {
