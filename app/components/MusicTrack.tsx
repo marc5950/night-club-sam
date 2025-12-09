@@ -1,5 +1,5 @@
 "use client";
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import Image from "next/image";
 
 import { FaRegCirclePlay } from "react-icons/fa6";
@@ -11,14 +11,28 @@ import { FaVolumeUp } from "react-icons/fa";
 import { getGalleryPhotos } from "@/app/lib/api";
 import { GalleryPhoto } from "@/app/types/api";
 
-const MusicTrack = async () => {
+const MusicTrack = () => {
   const audioRef = useRef<HTMLAudioElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTrackIndex, setCurrentTrackIndex] = useState(0);
   const [progress, setProgress] = useState(0);
   const [duration, setDuration] = useState(0);
+  const [photos, setPhotos] = useState<GalleryPhoto[]>([]);
 
-  const photos: GalleryPhoto[] = await getGalleryPhotos();
+  useEffect(() => {
+    const fetchPhotos = async () => {
+      try {
+        console.log("Fetching photos...");
+        const fetchedPhotos = await getGalleryPhotos();
+        console.log("Fetched photos:", fetchedPhotos);
+        setPhotos(fetchedPhotos.slice(0, 7));
+        console.log("Photos set:", fetchedPhotos.slice(0, 14));
+      } catch (error) {
+        console.error("Error fetching photos:", error);
+      }
+    };
+    fetchPhotos();
+  }, []);
 
   const tracks = [
     { title: "BLACK BOX FUNKY", src: "/media/black-box-funky.mp3" },
@@ -72,9 +86,30 @@ const MusicTrack = async () => {
     return `${minutes}:${seconds}`;
   };
 
+  if (photos.length === 0) {
+    return <div className="max-w-[1440px] p-6">Loading...</div>;
+  }
+
   return (
     <div className="max-w-[1440px]">
-        
+      {/* <div className="relative h-64">
+        <Image src={photos[0].asset.url} alt="" fill className="object-cover" unoptimized />
+      </div>
+      <div className="relative h-64">
+        <Image src={photos[1].asset.url} alt="" fill className="object-cover" unoptimized />
+      </div>
+      <div className="relative h-64">
+        <Image src={photos[2].asset.url} alt="" fill className="object-cover" unoptimized />
+      </div>
+      <div className="relative h-64">
+        <Image src={photos[0].asset.url} alt="" fill className="object-cover" unoptimized />
+      </div>
+      <div className="relative h-64">
+        <Image src={photos[1].asset.url} alt="" fill className="object-cover" unoptimized />
+      </div>
+      <div className="relative h-64">
+        <Image src={photos[2].asset.url} alt="" fill className="object-cover" unoptimized />
+      </div> */}
       <div className="max-w-[500px] mx-auto p-4 flex flex-col items-center gap-4">
         <audio className="" ref={audioRef} src={tracks[currentTrackIndex].src} onTimeUpdate={handleTimeUpdate} onLoadedMetadata={handleDurationChange} onEnded={skipForward} />
 
