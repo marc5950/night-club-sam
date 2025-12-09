@@ -12,29 +12,49 @@ const MusicTrack = () => {
   const audioRef = useRef<HTMLAudioElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTrackIndex, setCurrentTrackIndex] = useState(0);
+  const [progress, setProgress] = useState(0);
+  const [duration, setDuration] = useState(0);
 
   const tracks = [
-    { title: "Black Box Funky", src: "/media/black-box-funky.mp3" },
-    { title: "Euphoria", src: "/media/euphoria.mp3" },
-    { title: "Fashion Red Tape", src: "/media/fashion-red-tape.mp3" },
+    { title: "BLACK BOX FUNKY", src: "/media/black-box-funky.mp3" },
+    { title: "EUPHORIA", src: "/media/euphoria.mp3" },
+    { title: "FASHION RED TAPE", src: "/media/fashion-red-tape.mp3" },
   ];
 
+  // Play/pause
   const togglePlay = () => {
     if (!audioRef.current) return;
-    if (isPlaying) {
-      audioRef.current.pause();
-    } else {
-      audioRef.current.play();
-    }
+    if (isPlaying) audioRef.current.pause();
+    else audioRef.current.play();
     setIsPlaying(!isPlaying);
   };
 
+  // Frem/tilbage
   const skipForward = () => {
     setCurrentTrackIndex((prev) => (prev + 1) % tracks.length);
   };
-
   const skipBackward = () => {
     setCurrentTrackIndex((prev) => (prev - 1 + tracks.length) % tracks.length);
+  };
+
+  // Shuffle
+  const shuffleTrack = () => {
+    let nextIndex = Math.floor(Math.random() * tracks.length);
+    while (nextIndex === currentTrackIndex) {
+      nextIndex = Math.floor(Math.random() * tracks.length);
+    }
+    setCurrentTrackIndex(nextIndex);
+  };
+
+  // Fremdriftslinje
+  const handleTimeUpdate = () => {
+    if (!audioRef.current) return;
+    setProgress((audioRef.current.currentTime / audioRef.current.duration) * 100);
+  };
+
+  const handleDurationChange = () => {
+    if (!audioRef.current) return;
+    setDuration(audioRef.current.duration);
   };
 
   const handleTrackChange = () => {
@@ -49,35 +69,82 @@ const MusicTrack = () => {
     handleTrackChange();
   }, [currentTrackIndex]);
 
+  // Format tid som mm:ss
+  const formatTime = (time: number) => {
+    if (isNaN(time)) return "0:00";
+    const minutes = Math.floor(time / 60);
+    const seconds = Math.floor(time % 60)
+      .toString()
+      .padStart(2, "0");
+    return `${minutes}:${seconds}`;
+  };
+
   return (
-    <div className="max-w-[500px] mx-auto p-4 bg-gray-100 rounded-lg shadow-md">
-      {/* Standard audio element */}
-      <audio controls ref={audioRef} className="w-full" src={tracks[currentTrackIndex].src} onEnded={skipForward}>
-        Your browser does not support the audio element.
-      </audio>
-
-      {/* Egen play/pause-knap placeret under audio */}
-      <div className="flex justify-center mt-4">
-        <button onClick={togglePlay} className="text-pink-500 text-4xl">
-          {isPlaying ? <FaRegCirclePause /> : <FaRegCirclePlay />}
-        </button>
-      </div>
-
-      {/* Ekstra knapper: frem/back og shuffle */}
-      <div className="flex items-center justify-between mt-4">
-        <FaShuffle className="text-pink-500 text-2xl cursor-pointer" />
-        <div className="flex items-center gap-6">
-          <button onClick={skipBackward} className="text-pink-500 text-2xl">
-            <FaBackwardFast />
-          </button>
-          <button onClick={skipForward} className="text-pink-500 text-2xl">
-            <FaFastForward />
-          </button>
-        </div>
-      </div>
+    <div className="max-w-[500px] mx-auto p-4 flex flex-col items-center gap-4">
+      <audio className="" ref={audioRef} src={tracks[currentTrackIndex].src} onTimeUpdate={handleTimeUpdate} onLoadedMetadata={handleDurationChange} onEnded={skipForward} />
 
       {/* Titel */}
-      <p className="mt-2 text-center font-medium">{tracks[currentTrackIndex].title}</p>
+      <div className="w-full flex justify-start">
+        <p className="font-medium text-primary">{tracks[currentTrackIndex].title}</p>
+      </div>
+
+      {/* Fremdriftslinje */}
+      <div className="flex items-center gap-2 w-full">
+        <span>{formatTime(audioRef.current?.currentTime || 0)}</span>
+        <input
+          type="range"
+          className="flex-1 h-1 custom-range"
+          max={100}
+          value={progress}
+          onChange={(e) => {
+            if (!audioRef.current) return;
+            const newTime = (Number(e.target.value) / 100) * audioRef.current.duration;
+            audioRef.current.currentTime = newTime;
+            setProgress(Number(e.target.value));
+          }}
+        />
+        <span>{formatTime(duration)}</span>
+      </div>
+
+      {/* Knapper + volume */}
+      <div className="flex items-center gap-4 mt-2 w-full">
+        {/* Frem / Tilbage */}
+        <button onClick={skipBackward} className="text-primary text-2xl">
+          <FaBackwardFast />
+        </button>
+
+        {/* Play / Pause */}
+        <button onClick={togglePlay} className="text-primary text-4xl">
+          {isPlaying ? <FaRegCirclePause /> : <FaRegCirclePlay />}
+        </button>
+
+        {/* Frem / Fremad */}
+        <button onClick={skipForward} className="text-primary text-2xl">
+          <FaFastForward />
+        </button>
+
+        {/* Shuffle */}
+        <button onClick={shuffleTrack} className="text-primary text-2xl">
+          <FaShuffle />
+        </button>
+
+        {/* Volume */}
+        <div className="flex items-center gap-2">
+          <FaVolumeUp className="text-primary text-2xl" />
+          <input
+            type="range"
+            className="flex-1 h-1 custom-range w-6"
+            min={0}
+            max={1}
+            step={0.01}
+            value={audioRef.current?.volume || 0.5}
+            onChange={(e) => {
+              if (!audioRef.current) return;
+              audioRef.current.volume = Number(e.target.value);
+            }}
+          />
+        </div>
+      </div>
     </div>
   );
 };
