@@ -56,19 +56,19 @@ const API_BASE_URL = "http://localhost:4000";
  * - cache: "no-store": Sikrer at vi altid får frisk data (ingen caching)
  */
 async function apiGet<T>(endpoint: string): Promise<T> {
-	try {
-		const response = await fetch(`${API_BASE_URL}${endpoint}`, {
-			method: "GET",
-			cache: "no-store",
-		});
-		if (!response.ok) throw new Error(`GET ${endpoint} failed: ${response.status}`);
-		return (await response.json()) as T;
-	} catch (err) {
-		console.error(`API GET Error (${endpoint}):`, err);
-		// Hvis API'et er nede, returnerer vi et tomt array (hvis T er en liste) eller null
-		// Dette forhindrer appen i at crashe helt
-		return [] as unknown as T;
-	}
+  try {
+    const response = await fetch(`${API_BASE_URL}${endpoint}`, {
+      method: "GET",
+      cache: "no-store",
+    });
+    if (!response.ok) throw new Error(`GET ${endpoint} failed: ${response.status}`);
+    return (await response.json()) as T;
+  } catch (err) {
+    console.error(`API GET Error (${endpoint}):`, err);
+    // Hvis API'et er nede, returnerer vi et tomt array (hvis T er en liste) eller null
+    // Dette forhindrer appen i at crashe helt
+    return [] as unknown as T;
+  }
 }
 
 /**
@@ -84,18 +84,18 @@ async function apiGet<T>(endpoint: string): Promise<T> {
  * - body: JSON.stringify(data): Laver vores JavaScript objekt om til tekst
  */
 async function apiPost<T>(endpoint: string, data: unknown): Promise<T | null> {
-	try {
-		const response = await fetch(`${API_BASE_URL}${endpoint}`, {
-			method: "POST",
-			headers: { "Content-Type": "application/json" },
-			body: JSON.stringify(data),
-		});
-		if (!response.ok) throw new Error(`POST ${endpoint} failed: ${response.status}`);
-		return (await response.json()) as T;
-	} catch (err) {
-		console.error(`API POST Error (${endpoint}):`, err);
-		return null;
-	}
+  try {
+    const response = await fetch(`${API_BASE_URL}${endpoint}`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
+    });
+    if (!response.ok) throw new Error(`POST ${endpoint} failed: ${response.status}`);
+    return (await response.json()) as T;
+  } catch (err) {
+    console.error(`API POST Error (${endpoint}):`, err);
+    return null;
+  }
 }
 
 /**
@@ -109,16 +109,16 @@ async function apiPost<T>(endpoint: string, data: unknown): Promise<T | null> {
  * - Returnerer true hvis det lykkedes, false hvis det fejlede
  */
 async function apiDelete(endpoint: string): Promise<boolean> {
-	try {
-		const response = await fetch(`${API_BASE_URL}${endpoint}`, {
-			method: "DELETE",
-		});
-		if (!response.ok) throw new Error(`DELETE ${endpoint} failed: ${response.status}`);
-		return true;
-	} catch (err) {
-		console.error(`API DELETE Error (${endpoint}):`, err);
-		return false;
-	}
+  try {
+    const response = await fetch(`${API_BASE_URL}${endpoint}`, {
+      method: "DELETE",
+    });
+    if (!response.ok) throw new Error(`DELETE ${endpoint} failed: ${response.status}`);
+    return true;
+  } catch (err) {
+    console.error(`API DELETE Error (${endpoint}):`, err);
+    return false;
+  }
 }
 
 // ============================================================================
@@ -150,9 +150,9 @@ export const deleteComment = (id: number) => apiDelete(`/comments/${id}`);
 // ============================================================================
 // CONTACT MESSAGES
 // ============================================================================
-export const getContactMessages = () => apiGet<ContactMessage[]>("/contact-messages");
+export const getContactMessages = () => apiGet<ContactMessage[]>("/contact_messages");
 
-export const sendContactMessage = (message: Omit<ContactMessage, "id" | "createdAt">) => apiPost<ContactMessage>("/contact-messages", message);
+export const sendContactMessage = (message: Omit<ContactMessage, "id" | "createdAt">) => apiPost<ContactMessage>("/contact_messages", message);
 
 // ============================================================================
 // GALLERY
@@ -164,8 +164,7 @@ export const getGalleryPhotos = () => apiGet<GalleryPhoto[]>("/gallery-photos");
 // ============================================================================
 export const getNewsletterSubscriptions = () => apiGet<NewsletterSubscription[]>("/newsletter-subscriptions");
 
-export const createNewsletterSubscription = (sub: Omit<NewsletterSubscription, "id" | "subscribedAt">) =>
-	apiPost<NewsletterSubscription>("/newsletter-subscriptions", sub);
+export const createNewsletterSubscription = (sub: Omit<NewsletterSubscription, "id" | "subscribedAt">) => apiPost<NewsletterSubscription>("/newsletter-subscriptions", sub);
 
 // ============================================================================
 // RESERVATIONS
