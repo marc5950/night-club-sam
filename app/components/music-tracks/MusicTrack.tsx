@@ -110,11 +110,11 @@ const MusicTrack = () => {
 
         {/* Kun ét billede synligt på mobil */}
         <div className="flex justify-center items-center">
-          <TrackImage src={trackImages[visibleImageIndex].src} onClick={() => handleTrackSelect(trackImages[visibleImageIndex].trackIndex)} />
+          <TrackImage src={trackImages[visibleImageIndex].src} title={tracks[trackImages[visibleImageIndex].trackIndex].title} onClick={() => handleTrackSelect(trackImages[visibleImageIndex].trackIndex)} />
         </div>
 
         {/* Navigation pile */}
-        <div className="flex justify-center gap-8 mt-4">
+        <div className="flex justify-center gap-8 mt-10">
           <button onClick={scrollLeft}>
             <ScrollLeft />
           </button>
@@ -131,7 +131,7 @@ const MusicTrack = () => {
           {/* Aktivt billede og AudioPlayer side om side */}
           <div className="grid grid-cols-3 gap-8 items-center mb-8">
             <div className="col-span-1 justify-end flex">
-              <TrackImage src={activeImage.src} onClick={() => handleTrackSelect(activeImage.trackIndex)} />
+              <TrackImage src={activeImage.src} title={tracks[activeImage.trackIndex].title} onClick={() => handleTrackSelect(activeImage.trackIndex)} />
             </div>
             <div className="col-span-2">
               <AudioPlayer audioRef={audioRef} isPlaying={isPlaying} currentTrack={tracks[currentTrackIndex]} progress={progress} duration={duration} togglePlay={togglePlay} skipForward={skipForward} skipBackward={skipBackward} shuffleTrack={shuffleTrack} handleTimeUpdate={handleTimeUpdate} handleDurationChange={handleDurationChange} formatTime={formatTime} onProgressChange={handleProgressChange} />
@@ -145,7 +145,7 @@ const MusicTrack = () => {
             </button>
             <div className="flex flex-wrap justify-center ">
               {trackImages.map((image, index) => (
-                <TrackImage key={index} src={image.src} onClick={() => handleTrackSelect(image.trackIndex)} />
+                <TrackImage key={index} src={image.src} title={tracks[image.trackIndex].title} onClick={() => handleTrackSelect(image.trackIndex)} />
               ))}
             </div>
             <button onClick={scrollRight}>
