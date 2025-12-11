@@ -8,9 +8,9 @@ interface TrackImageProps {
   onClick?: () => void; // Funktion der kaldes når billedet klikkes
   title?: string; // Titel der vises ved hover
 }
-
+// Komponent der viser et billede med hover-effekter og klik-funktionalitet
 const TrackImage = ({ src, alt = "", onClick, title = "" }: TrackImageProps) => {
-  const [isHovered, setIsHovered] = useState(false);
+  const [isHovered, setIsHovered] = useState(false); // State der holder styr på om musen er over billedet
 
   return (
     <div className="relative inline-block cursor-pointer" onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)} onClick={onClick}>
