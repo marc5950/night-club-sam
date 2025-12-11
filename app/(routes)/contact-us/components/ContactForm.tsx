@@ -5,43 +5,69 @@ import { sendContactMessage } from "@/app/lib/api";
 import { useState } from "react";
 
 const ContactForm = () => {
+  // State til at håndtere om formularen er ved at blive sendt
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  // State til at vise succes eller fejl besked til brugeren
   const [submitMessage, setSubmitMessage] = useState("");
 
+  // React Hook Form setup - håndterer formularvalidering og data
   const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    reset,
-  } = useForm({ defaultValues: { name: "", email: "", comment: "" } });
+    register, // Registrerer input felter til validering
+    handleSubmit, // Wrapper submit funktionen og validerer først
+    formState: { errors }, // Indeholder valideringsfejl
+    reset, // Nulstiller formularen efter succesfuld indsendelse
+  } = useForm({
+    defaultValues: {
+      name: "",
+      email: "",
+      comment: "",
+    },
+  });
 
+  // Funktion der køres når formularen submittes OG valideringen er succesfuld
   const onSubmit = async (data: { name: string; email: string; comment: string }) => {
-    setIsSubmitting(true);
-    setSubmitMessage("");
+    setIsSubmitting(true); // Sætter loading state
+    setSubmitMessage(""); // Nulstiller tidligere beskeder
     console.log("Form data:", data);
 
     try {
+      // Sender data til API'et
       await sendContactMessage({
         name: data.name,
         email: data.email,
         message: data.comment,
       });
-      setSubmitMessage("Your message has been sent successfully!");
-      reset();
+
+      // Hvis succesfuld - vis succes besked
+      setSubmitMessage("Din kommentar er tilføjet! Tak for din feedback.");
+      reset(); // Nulstiller formularen
     } catch (error) {
-      setSubmitMessage("There was an error sending your message. Please try again.");
+      // Hvis der sker en fejl - vis fejl besked
+      setSubmitMessage("Der opstod en fejl under afsendelse af din kommentar. Prøv venligst igen.");
     } finally {
-      setIsSubmitting(false);
+      setIsSubmitting(false); // Fjerner loading state uanset resultat
     }
   };
 
   return (
     <form className="max-w-[1440px] p-6 mx-auto" onSubmit={handleSubmit(onSubmit)}>
       <div className="grid grid-cols-1 mx-auto w-full md:w-3xl">
+        {/* Navn felt */}
         <div className="mb-4">
-          <input className="text-primary  focus:bg-background focus:outline-none focus:border-[#FF2A70]  focus:ring-0 bg-background border border-primary placeholder-primary p-4 w-full" id="name" placeholder="Your Name" {...register("name", { required: "Name is required" })} />
-          {errors.name && <p>{errors.name.message}</p>}
+          <input
+            className="text-primary focus:bg-background focus:outline-none focus:border-[#FF2A70] focus:ring-0 bg-background border border-primary placeholder-primary p-4 w-full"
+            id="name"
+            placeholder="Your Name"
+            {...register("name", {
+              required: "Angiv venligst dit navn", // Validering: Navn er påkrævet
+            })}
+          />
+          {/* Viser fejlbesked hvis navn ikke er udfyldt */}
+          {errors.name && <p className="text-red-500 mt-1">{errors.name.message}</p>}
         </div>
+
+        {/* Email felt */}
         <div className="mb-4">
           <input
             className="text-primary focus:bg-background focus:border-[#FF2A70] focus:outline-none focus:ring-0 bg-background border border-primary placeholder-primary p-4 w-full"
@@ -49,20 +75,35 @@ const ContactForm = () => {
             type="email"
             placeholder="Your Email"
             {...register("email", {
-              required: "Email is required",
+              required: "Angiv venligst din email", // Validering: Email er påkrævet
               pattern: {
-                value: /^\S+@\S+$/i,
-                message: "Invalid email address",
+                value: /^\S+@\S+$/i, // Sørger for at det er en gyldig email format (regex-mønster)
+                message: "Ugyldig email adresse", // Fejlbesked ved ugyldig email
               },
             })}
           />
-          {errors.email && <p>{errors.email.message}</p>}
+          {/* Viser fejlbesked hvis email ikke er udfyldt eller ugyldig */}
+          {errors.email && <p className="text-red-500 mt-1">{errors.email.message}</p>}
         </div>
+
+        {/* Kommentar felt */}
         <div className="mb-4">
-          <textarea className="placeholder-primary focus:bg-background focus:border-[#FF2A70] border border-primary bg-background p-4 w-full h-70 focus:outline-none focus:ring-0" id="comment" placeholder="Your Comment" {...register("comment", { required: "Comment is required" })}></textarea>
-          {errors.comment && <p>{errors.comment.message}</p>}
+          <textarea
+            className="placeholder-primary focus:bg-background focus:border-[#FF2A70] border border-primary bg-background p-4 w-full h-70 focus:outline-none focus:ring-0"
+            id="comment"
+            placeholder="Your Comment"
+            {...register("comment", {
+              required: "Angiv venligst din kommentar", // Validering: Kommentar er påkrævet
+            })}
+          />
+          {/* Viser fejlbesked hvis kommentar ikke er udfyldt */}
+          {errors.comment && <p className="text-red-500 mt-1">{errors.comment.message}</p>}
         </div>
-        {submitMessage && <p className={`mb-4 text-center ${submitMessage.includes("successfully") ? "text-green-500" : "text-red-500"}`}>{submitMessage}</p>}
+
+        {/* Succes eller fejl besked efter submit */}
+        {submitMessage && <p className={`mb-4 text-center ${submitMessage.includes("tilføjet") ? "text-green-500" : "text-red-500"}`}>{submitMessage}</p>}
+
+        {/* Submit knap */}
         <div className="flex justify-end">
           <Button text={isSubmitting ? "Sending..." : "Send"} />
         </div>
