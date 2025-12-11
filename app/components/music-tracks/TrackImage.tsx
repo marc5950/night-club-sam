@@ -3,10 +3,10 @@ import { useState } from "react";
 import { FaRegCirclePlay } from "react-icons/fa6";
 
 interface TrackImageProps {
-  src: string;
-  alt?: string;
-  onClick?: () => void; // En funktion der ikke tager parametre og ikke returnerer noget
-  title?: string;
+  src: string; // Sti til billedet
+  alt?: string; // Alternativ tekst til billedet
+  onClick?: () => void; // Funktion der kaldes når billedet klikkes
+  title?: string; // Titel der vises ved hover
 }
 
 const TrackImage = ({ src, alt = "", onClick, title = "" }: TrackImageProps) => {
@@ -14,10 +14,13 @@ const TrackImage = ({ src, alt = "", onClick, title = "" }: TrackImageProps) => 
 
   return (
     <div className="relative inline-block cursor-pointer" onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)} onClick={onClick}>
-      {/* Billedet */}
+      {/* Boolean der holder styr på om musen er over billedet */}
+      { /* onMouseEnter / onMouseLeave events opdaterer isHovered state */}
+
+      {/* Selve billedet */}
       <img src={src} alt={alt} />
 
-      {/* Title below image - z-10 så den ligger bag borders */}
+      {/* Titel under billedet - z-10 så den ligger bag borders */}
       {title && (
         <div className={`absolute bottom-0 left-0 right-0 text-center transition-all duration-500 ${isHovered ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2"} z-10`}>
           <p className="text-white font-bold text-lg bg-black px-4 py-2">{title}</p>
