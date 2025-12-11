@@ -5,21 +5,21 @@ import TestimonialList from "./components/testimonials/TestimonialList";
 import BlogRecent from "./components/recent-blog/BlogRecent";
 import VideoCard from "./components/VideoCard";
 import ClubGallery from "./components/gallery/ClubGallery";
-import MusicTrack from "./components/MusicTrack";
+import MusicTrack from "./components/music-tracks/MusicTrack";
 
 export default function Home() {
-	return (
-		<div>
-			<main>
-				<Hero />
-				<WelcomeInNightclub />
-				<ClubGallery />
-				<MusicTrack />
-				<VideoCard />
-				<TestimonialList />
-				<BlogRecent />
-				<Newsletter />
-			</main>
-		</div>
-	);
+  return (
+    <div>
+      <main>
+        <Hero />
+        <WelcomeInNightclub />
+        <ClubGallery />
+        <MusicTrack />
+        <VideoCard />
+        <TestimonialList />
+        <BlogRecent />
+        <Newsletter />
+      </main>
+    </div>
+  );
 }
