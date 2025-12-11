@@ -18,6 +18,7 @@ interface GalleryInteractiveProps {
 const GalleryItem = ({ photo, index, onClick, className }: { photo: GalleryPhoto; index: number; onClick: () => void; className: string }) => {
 	const [isHovered, setIsHovered] = useState(false);
 
+	// Returner det enkelte galleri element som boilerplate
 	return (
 		<div
 			className={`relative cursor-pointer group overflow-hidden ${className}`}
@@ -32,13 +33,18 @@ const GalleryItem = ({ photo, index, onClick, className }: { photo: GalleryPhoto
 	);
 };
 
+// Hovedkomponent til det interaktive galleri med lightbox funktionalitet
 const GalleryInteractive = ({ photos }: GalleryInteractiveProps) => {
 	// State til at holde styr på hvilket billede der er valgt i lightboxen (null = ingen valgt)
 	const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
 
 	// Funktion til at vise næste billede (kører i ring)
 	const showNext = (e: React.MouseEvent) => {
+		// e.stopPropagation() sikrer, at klik på pilen IKKE også opfattes som et klik på baggrunden (som ville lukke modalen).
 		e.stopPropagation();
+		// Hvis et billede er valgt, opdaterers selectedIndex til næste billede
+		// Hvis previous er null (bør ikke ske her), forbliver det null
+		// Ellers bruges modulo operatoren (%) for at køre i ring
 		if (selectedIndex !== null) {
 			setSelectedIndex((prev) => (prev === null ? null : (prev + 1) % photos.length));
 		}
@@ -89,12 +95,12 @@ const GalleryInteractive = ({ photos }: GalleryInteractiveProps) => {
 					</button>
 
 					{/* Venstre Pil - Navigerer til forrige billede */}
-					<div onClick={showPrev} className="absolute left-4 z-50 cursor-pointer">
+					<div onClick={showPrev} className="absolute left-4 z-50 cursor-pointer select-none">
 						<ScrollLeft />
 					</div>
 
 					{/* Billede Container - Klik her lukker ikke modalen (stopPropagation) */}
-					<div className="relative max-w-3xl w-full max-h-[80vh] flex flex-col items-center" onClick={(e) => e.stopPropagation()}>
+					<div className="relative max-w-3xl w-full max-h-[80vh] flex flex-col items-center select-none" onClick={(e) => e.stopPropagation()}>
 						<div className="relative w-full h-[20vh] md:h-[70vh]">
 							<Image
 								src={photos[selectedIndex]?.asset.url}
@@ -125,7 +131,7 @@ const GalleryInteractive = ({ photos }: GalleryInteractiveProps) => {
 					</div>
 
 					{/* Højre Pil - Navigerer til næste billede */}
-					<div onClick={showNext} className="absolute right-4 z-50 cursor-pointer">
+					<div onClick={showNext} className="absolute right-4 z-50 cursor-pointer select-none">
 						<ScrollRight />
 					</div>
 				</div>
