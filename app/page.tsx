@@ -5,7 +5,8 @@ import TestimonialList from "./components/testimonials/TestimonialList";
 import BlogRecent from "./components/recent-blog/BlogRecent";
 import VideoCard from "./components/VideoCard";
 import ClubGallery from "./components/ClubGallery";
-import MusicTrack from "./components/MusicTrack";
+import MusicTrack from "./components/music-tracks/MusicTrack";
+import Title from "./components/general/Title";
 
 export default function Home() {
   return (
