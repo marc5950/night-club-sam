@@ -1,6 +1,7 @@
 "use client";
 
 interface ScrollBarProps {
+  count?: number; // Antal prikker der skal vises
   active: number; // Hvilken prik der er aktiv, altså den der er valgt
   onSelect: (id: number) => void; // Funktion der viser hvilken prik der er valgt, som så defineres i parent komponentet
   activeColor: string; // Farve for aktiv prik

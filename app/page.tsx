@@ -6,20 +6,22 @@ import BlogRecent from "./components/recent-blog/BlogRecent";
 import VideoCard from "./components/VideoCard";
 import ClubGallery from "./components/gallery/ClubGallery";
 import MusicTrack from "./components/MusicTrack";
+import EventSection from "./components/events/EventSection";
 
 export default function Home() {
-	return (
-		<div>
-			<main>
-				<Hero />
-				<WelcomeInNightclub />
-				<ClubGallery />
-				<MusicTrack />
-				<VideoCard />
-				<TestimonialList />
-				<BlogRecent />
-				<Newsletter />
-			</main>
-		</div>
-	);
+  return (
+    <div>
+      <main>
+        <Hero />
+        <WelcomeInNightclub />
+        <EventSection />
+        <ClubGallery />
+        <MusicTrack />
+        <VideoCard />
+        <TestimonialList />
+        <BlogRecent />
+        <Newsletter />
+      </main>
+    </div>
+  );
 }
