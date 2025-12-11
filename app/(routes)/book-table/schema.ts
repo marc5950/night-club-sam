@@ -3,6 +3,7 @@ import { tables } from "./data/tables";
 
 // 1. Definer Zod schema (Regler for formularen)
 export const schema = z
+	// Laer et array af felter med tilhørende valideringsregler i forhold til booking af bord formen
 	.object({
 		// Navn skal være en tekststreng på mindst 2 tegn
 		name: z.string().min(2, { message: "Navnet skal være mindst 2 bogstaver" }),
@@ -51,4 +52,6 @@ export const schema = z
 	);
 
 // 2. Udled typen fra schemaet
+// Type = et TypeScript interface der matcher schemaet ovenfor
+// z.infer<typeof schema> laver automatisk typen baseret på Zod schemaet
 export type BookFormData = z.infer<typeof schema>;

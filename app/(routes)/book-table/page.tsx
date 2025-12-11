@@ -1,24 +1,19 @@
-"use client";
-
-import { useState } from "react";
+import { Metadata } from "next";
 import HeroSmall from "../../components/general/HeroSmall";
-import BookForm from "./components/BookForm";
-import TablesList from "./components/TablesList";
+import BookTableClient from "./components/BookTableClient";
+
+export const metadata: Metadata = {
+	title: "Night Club - Book Table",
+	description: "Book a table at Night Club",
+};
 
 const BookTable = () => {
-  // State til at holde styr på hvilket bord der er valgt
-  const [selectedTable, setSelectedTable] = useState<number | null>(null);
-
-  return (
-    <main>
-      <HeroSmall title="Book Table" />
-      {/* Vi sender setSelectedTable funktionen ned til TablesList, så vi kan opdatere state når man klikker på et bord */}
-      <TablesList onSelectTable={setSelectedTable} />
-
-      {/* Vi sender det valgte bordnummer ned til formularen, så den kan udfylde feltet automatisk */}
-      <BookForm selectedTable={selectedTable} />
-    </main>
-  );
+	return (
+		<main>
+			<HeroSmall title="Book Table" />
+			<BookTableClient />
+		</main>
+	);
 };
 
 export default BookTable;
