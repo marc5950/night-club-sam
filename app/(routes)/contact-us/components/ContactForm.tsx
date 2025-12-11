@@ -40,11 +40,11 @@ const ContactForm = () => {
       });
 
       // Hvis succesfuld - vis succes besked
-      setSubmitMessage("Din kommentar er tilføjet! Tak for din feedback.");
+      setSubmitMessage("Din besked er sendt! Vi vender tilbage til dig snarest.");
       reset(); // Nulstiller formularen
     } catch (error) {
       // Hvis der sker en fejl - vis fejl besked
-      setSubmitMessage("Der opstod en fejl under afsendelse af din kommentar. Prøv venligst igen.");
+      setSubmitMessage("Der opstod en fejl under afsendelse af din besked. Prøv venligst igen.");
     } finally {
       setIsSubmitting(false); // Fjerner loading state uanset resultat
     }
@@ -93,7 +93,7 @@ const ContactForm = () => {
             id="comment"
             placeholder="Your Comment"
             {...register("comment", {
-              required: "Angiv venligst din kommentar", // Validering: Kommentar er påkrævet
+              required: "Angiv venligst hvad du har brug for hjælp til", // Validering: Angiv venligst hvad du har brug for hjælp til
             })}
           />
           {/* Viser fejlbesked hvis kommentar ikke er udfyldt */}
@@ -101,7 +101,7 @@ const ContactForm = () => {
         </div>
 
         {/* Succes eller fejl besked efter submit */}
-        {submitMessage && <p className={`mb-4 text-center ${submitMessage.includes("tilføjet") ? "text-green-500" : "text-red-500"}`}>{submitMessage}</p>}
+        {submitMessage && <p className={`mb-4 text-center ${submitMessage.includes("sendt") ? "text-green-500" : "text-red-500"}`}>{submitMessage}</p>}
 
         {/* Submit knap */}
         <div className="flex justify-end">
