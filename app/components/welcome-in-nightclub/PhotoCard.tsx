@@ -16,7 +16,7 @@ const PhotoCard = ({ image, icon, title, desc }: PhotoCardProps) => {
 
 	return (
 		<div
-			className="relative w-60 h-80 overflow-hidden cursor-pointer group"
+			className="relative w-full sm:w-60 h-80 overflow-hidden cursor-pointer group"
 			onMouseEnter={() => setIsHovered(true)}
 			onMouseLeave={() => setIsHovered(false)}
 			onTouchStart={() => setIsHovered(true)}
