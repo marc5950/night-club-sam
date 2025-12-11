@@ -61,6 +61,10 @@ const ContactForm = () => {
             placeholder="Your Name"
             {...register("name", {
               required: "Angiv venligst dit navn", // Validering: Navn er påkrævet
+              minLength: {
+                value: 2,
+                message: "Navnet skal være mindst 2 karakterer langt",
+              },
             })}
           />
           {/* Viser fejlbesked hvis navn ikke er udfyldt */}
