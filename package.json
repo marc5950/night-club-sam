@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
+    "framer-motion": "^12.23.26",
     "motion": "^12.23.26",
     "next": "16.0.7",
     "react": "19.2.1",
