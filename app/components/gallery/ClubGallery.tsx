@@ -13,15 +13,9 @@ const ClubGallery = async () => {
 
   // 3. Send data videre til Client Component som håndterer klik og lightbox
   return (
-    <motion.div
-      className='w-full overflow-hidden'
-      initial={{ opacity: 0, x: 30 }}
-      whileInView={{ opacity: 1, x: 0 }}
-      transition={{ duration: 0.6 }}
-      viewport={{ once: true }} // kun animér én gang
-    >
+    <div className='w-full overflow-hidden'>
       <GalleryInteractive photos={limitedPhotos} />
-    </motion.div>
+    </div>
   );
 };
 
