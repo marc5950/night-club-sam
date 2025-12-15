@@ -39,10 +39,10 @@ const FormComment = ({ blogpostId }: FormCommentProps) => {
         content: data.comment,
         date: new Date().toISOString(),
       });
-      setSubmitMessage("Din kommentar er blevet tilføjet! Tak for din feedback.");
+      setSubmitMessage("Your comment has been added! Thank you for your feedback.");
       reset(); // Nulstiller formularen ved success
     } catch (error) {
-      setSubmitMessage("Der opstod en fejl under afsendelse af din kommentar. Prøv venligst igen.");
+      setSubmitMessage("There was an error submitting your comment. Please try again.");
       console.error("Error:", error);
     } finally {
       setIsSubmitting(false);
@@ -63,10 +63,10 @@ const FormComment = ({ blogpostId }: FormCommentProps) => {
             id="name"
             placeholder="Your Name"
             {...register("name", {
-              required: "Angiv venligst dit navn", // Validering: Navn er påkrævet
+              required: "Please enter your name", // Validation: Name is required
               minLength: {
                 value: 2,
-                message: "Navnet skal være mindst 2 karakterer langt",
+                message: "Name must be at least 2 characters long",
               },
             })}
           />
@@ -81,10 +81,10 @@ const FormComment = ({ blogpostId }: FormCommentProps) => {
             type="email"
             placeholder="Your Email"
             {...register("email", {
-              required: "Angiv venligst din email",
+              required: "Please enter your email",
               pattern: {
                 value: /^\S+@\S+$/i, // Regex til email validering
-                message: "Ugyldig email adresse",
+                message: "Invalid email address",
               },
             })}
           />
@@ -94,15 +94,15 @@ const FormComment = ({ blogpostId }: FormCommentProps) => {
 
       {/* Kommentar felt med required validering */}
       <div className=" mb-4">
-        <textarea className="placeholder-primary border border-primary focus:outline-none focus:border-[#FF2A70] focus:ring-0 focus:bg-black bg-black p-4 w-full h-70" id="comment" placeholder="Your Comment" {...register("comment", { required: "Angiv venligst din kommentar" })}></textarea>
+        <textarea className="placeholder-primary border border-primary focus:outline-none focus:border-[#FF2A70] focus:ring-0 focus:bg-black bg-black p-4 w-full h-70" id="comment" placeholder="Your Comment" {...register("comment", { required: "Please enter your comment" })}></textarea>
         {errors.comment && <p className="text-red-500 mt-1">{errors.comment.message}</p>}
       </div>
 
       {/* Succes eller fejl besked */}
-      {submitMessage && <p className={`mb-4 text-center ${submitMessage.includes("tilføjet") ? "text-green-500" : "text-red-500"}`}>{submitMessage}</p>}
+      {submitMessage && <p className={`mb-4 text-center ${submitMessage.includes("added") ? "text-green-500" : "text-red-500"}`}>{submitMessage}</p>}
 
       {/* Submit knap - disabled mens der sendes */}
-      <div className="flex justify-end">
+      <div className="flex justify-end mb-6">
         <Button text={isSubmitting ? "Submitting..." : "Submit"} />
       </div>
     </form>
