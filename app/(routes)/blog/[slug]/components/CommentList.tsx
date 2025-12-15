@@ -8,7 +8,7 @@ const CommentList = ({ comments }: CommentListProps) => {
   if (!comments || comments.length === 0) {
     return (
       <div className="max-w-[1440px]">
-        <h4 className="text-primary md:p-0 pl-4 md:ml-42 text-2xl uppercase">No comments yet</h4>
+        <h4 className="text-primary md:p-0 pl-4 font-bold mt-10 md:ml-42 text-2xl uppercase">No comments yet</h4>
       </div>
     );
   }
