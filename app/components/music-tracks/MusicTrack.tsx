@@ -176,20 +176,38 @@ const MusicTrack = () => {
   const activeImage = trackImages.find((image) => image.trackIndex === currentTrackIndex) || trackImages[0];
 
   return (
-    <div className="max-w-[1440px]">
-      <Title title="Night Club Track" />
+    <div className='max-w-[1440px] px-6 mx-auto my-40'>
+      <Title title='Night Club Track' />
 
       {/* Mobile view */}
-      <div className="md:hidden">
-        <AudioPlayer audioRef={audioRef} isPlaying={isPlaying} currentTrack={tracks[currentTrackIndex]} progress={progress} duration={duration} togglePlay={togglePlay} skipForward={skipForward} skipBackward={skipBackward} shuffleTrack={shuffleTrack} handleTimeUpdate={handleTimeUpdate} handleDurationChange={handleDurationChange} formatTime={formatTime} onProgressChange={handleProgressChange} />
+      <div className='md:hidden'>
+        <AudioPlayer
+          audioRef={audioRef}
+          isPlaying={isPlaying}
+          currentTrack={tracks[currentTrackIndex]}
+          progress={progress}
+          duration={duration}
+          togglePlay={togglePlay}
+          skipForward={skipForward}
+          skipBackward={skipBackward}
+          shuffleTrack={shuffleTrack}
+          handleTimeUpdate={handleTimeUpdate}
+          handleDurationChange={handleDurationChange}
+          formatTime={formatTime}
+          onProgressChange={handleProgressChange}
+        />
 
         {/* Kun ét billede synligt på mobil */}
-        <div className="flex justify-center items-center pt-8">
-          <TrackImage src={trackImages[visibleImageIndex].src} title={tracks[trackImages[visibleImageIndex].trackIndex].title} onClick={() => handleTrackSelect(trackImages[visibleImageIndex].trackIndex)} />
+        <div className='flex justify-center items-center pt-8'>
+          <TrackImage
+            src={trackImages[visibleImageIndex].src}
+            title={tracks[trackImages[visibleImageIndex].trackIndex].title}
+            onClick={() => handleTrackSelect(trackImages[visibleImageIndex].trackIndex)}
+          />
         </div>
 
         {/* Navigation pile */}
-        <div className="flex justify-center gap-8 mt-10">
+        <div className='flex justify-center gap-8 mt-10'>
           <button onClick={scrollLeft}>
             <ScrollLeft />
           </button>
@@ -200,25 +218,43 @@ const MusicTrack = () => {
       </div>
 
       {/* Desktop view */}
-      <div className="hidden md:block px-6">
+      <div className='hidden md:block px-6'>
         {/* Container for hele desktop sectionen */}
-        <div className="flex flex-col items-center">
+        <div className='flex flex-col items-center'>
           {/* Aktivt billede og AudioPlayer side om side */}
-          <div className="grid grid-cols-4 gap-8 items-center">
-            <div className="col-span-1 justify-end flex">
-              <TrackImage src={activeImage.src} title={tracks[activeImage.trackIndex].title} onClick={() => handleTrackSelect(activeImage.trackIndex)} />
+          <div className='grid grid-cols-4 gap-8 items-center'>
+            <div className='col-span-1 justify-end flex'>
+              <TrackImage
+                src={activeImage.src}
+                title={tracks[activeImage.trackIndex].title}
+                onClick={() => handleTrackSelect(activeImage.trackIndex)}
+              />
             </div>
-            <div className="col-span-3">
-              <AudioPlayer audioRef={audioRef} isPlaying={isPlaying} currentTrack={tracks[currentTrackIndex]} progress={progress} duration={duration} togglePlay={togglePlay} skipForward={skipForward} skipBackward={skipBackward} shuffleTrack={shuffleTrack} handleTimeUpdate={handleTimeUpdate} handleDurationChange={handleDurationChange} formatTime={formatTime} onProgressChange={handleProgressChange} />
+            <div className='col-span-3'>
+              <AudioPlayer
+                audioRef={audioRef}
+                isPlaying={isPlaying}
+                currentTrack={tracks[currentTrackIndex]}
+                progress={progress}
+                duration={duration}
+                togglePlay={togglePlay}
+                skipForward={skipForward}
+                skipBackward={skipBackward}
+                shuffleTrack={shuffleTrack}
+                handleTimeUpdate={handleTimeUpdate}
+                handleDurationChange={handleDurationChange}
+                formatTime={formatTime}
+                onProgressChange={handleProgressChange}
+              />
             </div>
           </div>
 
           {/* Alle billeder nedenunder */}
-          <div className="flex items-center justify-center gap-8">
+          <div className='flex items-center justify-center gap-8'>
             <button onClick={scrollLeft}>
               <ScrollLeft />
             </button>
-            <div className="flex flex-wrap justify-center ">
+            <div className='flex flex-wrap justify-center '>
               {trackImages.map((image, index) => (
                 <TrackImage key={index} src={image.src} title={tracks[image.trackIndex].title} onClick={() => handleTrackSelect(image.trackIndex)} />
               ))}

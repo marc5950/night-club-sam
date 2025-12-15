@@ -23,7 +23,7 @@ const EventSection = () => {
   // useRef gør at intervalRef bevarer sin værdi mellem renders, uden at skabe en rerendering
   // NodeJS.Timeout er typen for interval ID'et, som returneres af setInterval
   // null er startværdien, før intervallet er sat
-  const intervalRef = useRef<NodeJS.Timeout | null>(null);
+  const intervalRef = useRef<number | null>(null);
 
   // Funktion der henter events fra API'et
   useEffect(() => {
