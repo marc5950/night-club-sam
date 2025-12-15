@@ -51,7 +51,7 @@ const ContactForm = () => {
   };
 
   return (
-    <form className="max-w-[1440px] p-6 mx-auto" onSubmit={handleSubmit(onSubmit)}>
+    <form className="max-w-[1440px] p-6 mx-auto mt-10 mb-10" onSubmit={handleSubmit(onSubmit)}>
       <div className="grid grid-cols-1 mx-auto w-full md:w-3xl">
         {/* Navn felt */}
         <div className="mb-4">
@@ -91,7 +91,7 @@ const ContactForm = () => {
         </div>
 
         {/* Kommentar felt */}
-        <div className="mb-4">
+        <div>
           <textarea
             className="placeholder-primary focus:bg-background focus:border-[#FF2A70] border border-primary bg-background p-4 w-full h-70 focus:outline-none focus:ring-0"
             id="comment"
