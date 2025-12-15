@@ -28,12 +28,12 @@ npm run dev
 
 Åbn http://localhost:3000
 
-## Scripts
+## API
+
+3. Start API lokalt:
 
 ```bash
-npm run dev     # starter udviklingsserver
-npm run build   # bygger til produktion
-npm run start   # kører prod build lokalt
+npm start
 ```
 
 ## Arbejdsgang (Git)
@@ -60,11 +60,6 @@ Vi bruger Prettier til formatering.
 
 - Prettier: formatterer TypeScript/React-kode
 - `prettier-plugin-tailwindcss`: sorterer Tailwind classes automatisk
-
-Anbefaling:
-
-- Slå “Format on Save” til i VS Code
-- Brug Prettier som default formatter
 
 ## Projektstruktur
 
