@@ -40,11 +40,11 @@ const ContactForm = () => {
       });
 
       // Hvis succesfuld - vis succes besked
-      setSubmitMessage("Din besked er sendt! Vi vender tilbage til dig snarest.");
+      setSubmitMessage("Your message has been sent! We will get back to you shortly.");
       reset(); // Nulstiller formularen
     } catch (error) {
       // Hvis der sker en fejl - vis fejl besked
-      setSubmitMessage("Der opstod en fejl under afsendelse af din besked. Prøv venligst igen.");
+      setSubmitMessage("There was an error sending your message. Please try again.");
     } finally {
       setIsSubmitting(false); // Fjerner loading state uanset resultat
     }
@@ -60,10 +60,10 @@ const ContactForm = () => {
             id="name"
             placeholder="Your Name"
             {...register("name", {
-              required: "Angiv venligst dit navn", // Validering: Navn er påkrævet
+              required: "Please enter your name", // Validation: Name is required
               minLength: {
                 value: 2,
-                message: "Navnet skal være mindst 2 karakterer langt",
+                message: "Name must be at least 2 characters long",
               },
             })}
           />
@@ -79,10 +79,10 @@ const ContactForm = () => {
             type="email"
             placeholder="Your Email"
             {...register("email", {
-              required: "Angiv venligst din email", // Validering: Email er påkrævet
+              required: "Please enter your email", // Validation: Email is required
               pattern: {
-                value: /^\S+@\S+$/i, // Sørger for at det er en gyldig email format (regex-mønster)
-                message: "Ugyldig email adresse", // Fejlbesked ved ugyldig email
+                value: /^\S+@\S+$/i, // Ensures it is a valid email format (regex pattern)
+                message: "Invalid email address", // Error message for invalid email
               },
             })}
           />
@@ -97,7 +97,7 @@ const ContactForm = () => {
             id="comment"
             placeholder="Your Comment"
             {...register("comment", {
-              required: "Angiv venligst hvad du har brug for hjælp til", // Validering: Angiv venligst hvad du har brug for hjælp til
+              required: "Please enter your comment", // Validation: Please enter your comment
             })}
           />
           {/* Viser fejlbesked hvis kommentar ikke er udfyldt */}
@@ -105,7 +105,7 @@ const ContactForm = () => {
         </div>
 
         {/* Succes eller fejl besked efter submit */}
-        {submitMessage && <p className={`mb-4 text-center ${submitMessage.includes("sendt") ? "text-green-500" : "text-red-500"}`}>{submitMessage}</p>}
+        {submitMessage && <p className={`mb-4 text-center ${submitMessage.includes("sent") ? "text-green-500" : "text-red-500"}`}>{submitMessage}</p>}
 
         {/* Submit knap */}
         <div className="flex justify-end">

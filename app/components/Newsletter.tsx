@@ -4,20 +4,37 @@ import { useState } from "react";
 import Button from "./general/Button";
 
 const Newsletter = () => {
-  // State til at håndtere loading
+  // State til at håndtere om formularen er ved at blive sendt
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  // React Hook Form setup
+  // State til at vise succes eller fejl besked til brugeren
+  const [submitMessage, setSubmitMessage] = useState("");
+
+  // React Hook Form setup - håndterer formularvalidering og data
   const {
-    register,
-    handleSubmit,
-    formState: { errors, isSubmitSuccessful },
-    reset,
+    register, // Registrerer input felter til validering
+    handleSubmit, // Wrapper submit funktionen og validerer først
+    formState: { errors }, // Indeholder valideringsfejl
+    reset, // Nulstiller formularen efter succesfuld indsendelse
   } = useForm({ defaultValues: { email: "" } });
 
-  const onSubmit = (data: { email: string }) => {
+  // Funktion der køres når formularen submittes OG valideringen er succesfuld
+  const onSubmit = async (data: { email: string }) => {
+    setIsSubmitting(true); // Sætter loading state
+    setSubmitMessage(""); // Nulstiller tidligere beskeder
     console.log("Email:", data);
-    reset();
+
+    try {
+      // Hvis succesfuld - vis succes besked
+      setSubmitMessage("Tak for din tilmelding! Du vil modtage vores nyhedsbrev.");
+      reset(); // Nulstiller formularen
+    } catch (error) {
+      // Hvis der sker en fejl - vis fejl besked
+      setSubmitMessage("Der opstod en fejl under tilmelding. Prøv venligst igen.");
+      console.error("Error:", error);
+    } finally {
+      setIsSubmitting(false); // Fjerner loading state uanset resultat
+    }
   };
 
   return (
@@ -29,28 +46,30 @@ const Newsletter = () => {
 
       {/* Form wrapper omkring både input OG button */}
       <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col md:flex-row items-center gap-4 justify-center mb-5">
+        {/* Email felt */}
         <div className="flex flex-col">
           <input
             type="email"
             placeholder="Enter your email"
             {...register("email", {
-              required: "Angiv venligst din email",
+              required: "Angiv venligst din email", // Validering: Email er påkrævet
               pattern: {
-                value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-                message: "Ugyldig email adresse",
+                value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/, // Regex til email validering
+                message: "Ugyldig email adresse", // Fejlbesked ved ugyldig email
               },
             })}
             className="focus:bg-background focus:border-[#FF2A70] focus:outline-none focus:ring-0 bg-background border-primary placeholder-primary border-b text-primary text-lg px-4 py-4 capitalize w-70 md:w-130"
           />
-          {/* Fejlbesked vises under input feltet */}
-          {errors.email && <p className="text-red-500 mt-1 text-sm">{errors.email.message}</p>}
+          {/* Viser fejlbesked hvis email ikke er udfyldt eller ugyldig */}
+          {errors.email && <p className="text-red-500 mt-1 text-sm text-left">{errors.email.message}</p>}
         </div>
 
-        {/* Knap */}
-        <div className="block">
-          <Button text={isSubmitting ? "Submitting..." : "Submit"} />
-        </div>
+        {/* Submit knap */}
+        <Button text={isSubmitting ? "Subscribing..." : "Subscribe"} />
       </form>
+
+      {/* Succes eller fejl besked efter submit */}
+      {submitMessage && <p className={`text-center ${submitMessage.includes("Tak") ? "text-green-500" : "text-red-500"}`}>{submitMessage}</p>}
     </div>
   );
 };

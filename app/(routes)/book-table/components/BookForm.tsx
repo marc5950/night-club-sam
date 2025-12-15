@@ -70,7 +70,7 @@ const BookForm = ({ selectedTable }: BookFormProps) => {
 				// Hvis bordet er optaget, sæt en manuel fejl på 'table' feltet
 				setError("table", {
 					type: "manual",
-					message: "Dette bord er desværre allerede booket denne aften. Vælg venligst et andet bord eller en anden dato.",
+					message: "This table is already booked on this date. Please choose another table or date.",
 				});
 				return; // Stop her, opret ikke reservation
 			}
@@ -91,11 +91,11 @@ const BookForm = ({ selectedTable }: BookFormProps) => {
 			}
 
 			// 3. Vis succes besked og nulstil formular
-			setSubmitStatus({ success: true, message: "Tak for din reservation! Vi glæder os til at se dig." });
+			setSubmitStatus({ success: true, message: "Thank you for your reservation! We look forward to seeing you." });
 			reset(); // Tøm felterne
 		} catch (error) {
 			console.error("Error submitting form:", error);
-			setSubmitStatus({ success: false, message: "Der skete en fejl ved reservationen. Prøv venligst igen." });
+			setSubmitStatus({ success: false, message: "There was an error with your reservation. Please try again." });
 		}
 	};
 
