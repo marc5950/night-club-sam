@@ -29,7 +29,7 @@ interface AudioPlayerProps {
 // Selve AudioPlayer komponenten
 const AudioPlayer = ({ audioRef, isPlaying, currentTrack, progress, duration, togglePlay, skipForward, skipBackward, shuffleTrack, handleTimeUpdate, handleDurationChange, formatTime, onProgressChange }: AudioPlayerProps) => {
   return (
-    <div className="p-4 flex flex-col gap-4">
+    <div className="flex flex-col gap-4 px-6">
       <audio className="" ref={audioRef} src={currentTrack.src} onTimeUpdate={handleTimeUpdate} onLoadedMetadata={handleDurationChange} onEnded={skipForward} />
 
       {/* Titel */}

@@ -15,7 +15,7 @@ const TrackImage = ({ src, alt = "", onClick, title = "" }: TrackImageProps) => 
   return (
     <div className="relative inline-block cursor-pointer" onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)} onClick={onClick}>
       {/* Boolean der holder styr på om musen er over billedet */}
-      { /* onMouseEnter / onMouseLeave events opdaterer isHovered state */}
+      {/* onMouseEnter / onMouseLeave events opdaterer isHovered state */}
 
       {/* Selve billedet */}
       <img src={src} alt={alt} />
