@@ -10,6 +10,7 @@ import TrackImage from "./TrackImage";
 import ScrollLeft from "../ScrollLeft";
 import ScrollRight from "../ScrollRight";
 import Title from "../general/Title";
+import { set } from "zod";
 
 // Opretter et react komponent kaldet MusicTrack
 const MusicTrack = () => {
@@ -172,6 +173,16 @@ const MusicTrack = () => {
     setVisibleImageIndex((prev) => (prev + 1) % trackImages.length); // Sørger for at gå til første billede hvis vi er ved det sidste
   };
 
+  // Funktion til at håndtere forrige sang når der scroller til venstre i desktop visning
+  const handleValue = () => {
+    setCurrentTrackIndex((prev) => (prev === 0 ? tracks.length - 1 : prev - 1));
+  };
+
+  // Funktion til at håndtere næste sang når der scroller til højre i desktop visning
+  const handleNext = () => {
+    setCurrentTrackIndex((prev) => (prev + 1) % tracks.length);
+  };
+
   // Find det aktive billede baseret på currentTrackIndex, som hører til den sang der spiller for desktop visning
   const activeImage = trackImages.find((image) => image.trackIndex === currentTrackIndex) || trackImages[0];
 
@@ -251,7 +262,12 @@ const MusicTrack = () => {
 
           {/* Alle billeder nedenunder */}
           <div className='flex items-center justify-center gap-8'>
-            <button onClick={scrollLeft}>
+            <button
+              onClick={() => {
+                scrollLeft();
+                handleValue();
+              }}
+            >
               <ScrollLeft />
             </button>
             <div className='flex flex-wrap justify-center '>
@@ -259,7 +275,12 @@ const MusicTrack = () => {
                 <TrackImage key={index} src={image.src} title={tracks[image.trackIndex].title} onClick={() => handleTrackSelect(image.trackIndex)} />
               ))}
             </div>
-            <button onClick={scrollRight}>
+            <button
+              onClick={() => {
+                scrollRight();
+                handleNext();
+              }}
+            >
               <ScrollRight />
             </button>
           </div>
