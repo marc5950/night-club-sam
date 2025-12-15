@@ -47,7 +47,9 @@ const Newsletter = () => {
         </div>
 
         {/* Knap */}
-        <Button text={isSubmitting ? "Submitting..." : "Submit"} />
+        <div className="block">
+          <Button text={isSubmitting ? "Submitting..." : "Submit"} />
+        </div>
       </form>
     </div>
   );
