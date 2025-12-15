@@ -3,7 +3,7 @@ import { tables } from "./data/tables";
 
 // 1. Definer Zod schema (Regler for formularen)
 export const schema = z
-	// Laer et array af felter med tilhørende valideringsregler i forhold til booking af bord formen
+	// Laver et object med tilhørende valideringsregler i forhold til booking af bord formen
 	.object({
 		// Navn skal være en tekststreng på mindst 2 tegn
 		name: z.string().min(2, { message: "Navnet skal være mindst 2 bogstaver" }),
@@ -22,6 +22,7 @@ export const schema = z
 		date: z
 			.string()
 			.min(1, { message: "Vælg venligst en dato" })
+			// refine er en funktion der kommer med Zod, og som lader os lave vores egne regler
 			.refine((dato) => new Date(dato) > new Date(), {
 				message: "Datoen skal være i fremtiden",
 			}),

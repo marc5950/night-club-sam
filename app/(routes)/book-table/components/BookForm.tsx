@@ -23,8 +23,10 @@ const BookForm = ({ selectedTable }: BookFormProps) => {
 		setValue, // Funktion til manuelt at sætte en værdi i et felt
 		setError, // Funktion til manuelt at sætte en fejl på et felt
 		clearErrors, // Funktion til at fjerne fejl fra et felt
+		// Laver react-hook-form med Zod schemaet for validering
 	} = useForm<BookFormData>({
-		// 3. Tilføj resolver: Forbinder Zod schemaet med React Hook Form
+		// Tilføj resolver: Forbinder Zod schemaet med React Hook Form
+		// resolver er et property der kommer fra zodResolver pakken og som forbinder Zod validering med react-hook-form
 		resolver: zodResolver(schema),
 		defaultValues: {
 			name: "",
@@ -49,6 +51,9 @@ const BookForm = ({ selectedTable }: BookFormProps) => {
 	}, [selectedTable, setValue, clearErrors]);
 
 	// Denne funktion køres KUN hvis Zod valideringen er godkendt
+	// async fordi vi laver API kald inde i den
+	// async betyder at funktionen returnerer et Promise
+	// data er af typen BookFormData (defineret i schema.ts)
 	const onSubmit = async (data: BookFormData) => {
 		setSubmitStatus(null); // Nulstil tidligere status beskeder
 

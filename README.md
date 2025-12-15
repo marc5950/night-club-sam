@@ -1,36 +1,82 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Night Club (Next.js)
 
-## Getting Started
+Projekt til en night club hjemmeside bygget med Next.js App Router. Lavet af Aylin, Sarah & Marcus - Team SAM
 
-First, run the development server:
+## Tech stack
+
+- Next.js 16 + React 19
+- TypeScript
+- Tailwind CSS v4
+- Framer Motion (animation)
+- React Hook Form + Zod (formularer/validering)
+- Zustand (state)
+- React Icons
+
+## Kom i gang
+
+1. Installér dependencies:
+
+```bash
+npm i
+```
+
+2. Start dev-server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Åbn http://localhost:3000
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Scripts
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run dev     # starter udviklingsserver
+npm run build   # bygger til produktion
+npm run start   # kører prod build lokalt
+```
 
-## Learn More
+## Arbejdsgang (Git)
 
-To learn more about Next.js, take a look at the following resources:
+Vi bruger en feature-branch workflow for at holde `main` stabil.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- Arbejd ikke direkte på `main`
+- Opret en branch pr. feature/fix
+- Merge tilbage til `main` når det virker og er testet
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+**Branch-navne**
 
-## Deploy on Vercel
+- Brug kebab-case og beskrivende navne (engelsk)
+- Eksempler: `create-navbar`, `fix-booking-bug`, `gallery-popup`
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+**Commit-beskeder**
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Skriv korte, beskrivende commits (helst engelsk)
+- Brug bydeform: `Add ...`, `Fix ...`, `Remove ...`
+
+## Formatterings- og kode-standard
+
+Vi bruger Prettier til formatering.
+
+- Prettier: formatterer TypeScript/React-kode
+- `prettier-plugin-tailwindcss`: sorterer Tailwind classes automatisk
+
+Anbefaling:
+
+- Slå “Format on Save” til i VS Code
+- Brug Prettier som default formatter
+
+## Projektstruktur
+
+Projektet bruger Next.js App Router og fil-baseret routing.
+
+- `app/`: routes, layouts og pages
+- `app/(routes)/`: route groups (organisering uden at ændre URL)
+- `app/(routes)/blog/[slug]/`: dynamic routes til blogindlæg
+- `app/components/`: genbrugelige og feature-specifikke komponenter
+- `app/lib/`: API-klient og helpers
+- `app/types/`: TypeScript typer til API og data
+
+Navngivning:
+
+- Komponentfiler i PascalCase (fx `EventCard.tsx`)
