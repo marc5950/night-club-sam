@@ -50,7 +50,7 @@ const FormComment = ({ blogpostId }: FormCommentProps) => {
   };
 
   return (
-    <form className="max-w-[1440px] p-4 mx-auto mt-10 md:ml-42 md:mr-42 md:p-0" onSubmit={handleSubmit(onSubmit)}>
+    <form className="max-w-[1440px] p-4 mx-auto mt-10 mb-10 md:ml-42 md:mr-42 md:p-0" onSubmit={handleSubmit(onSubmit)}>
       <h3 className="text-primary text-[32px] mb-4 font-bold">LEAVE A COMMENT</h3>
 
       {/* Navn og Email felter - side om side på desktop */}
@@ -102,7 +102,7 @@ const FormComment = ({ blogpostId }: FormCommentProps) => {
       {submitMessage && <p className={`mb-4 text-center ${submitMessage.includes("added") ? "text-green-500" : "text-red-500"}`}>{submitMessage}</p>}
 
       {/* Submit knap - disabled mens der sendes */}
-      <div className="flex justify-end mb-6">
+      <div className="flex justify-end">
         <Button text={isSubmitting ? "Submitting..." : "Submit"} />
       </div>
     </form>
