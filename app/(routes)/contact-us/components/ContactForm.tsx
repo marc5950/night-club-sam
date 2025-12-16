@@ -53,6 +53,8 @@ const ContactForm = () => {
   return (
     <form className="max-w-[1440px] p-6 mx-auto mt-10 mb-10" noValidate onSubmit={handleSubmit(onSubmit)}>
       <div className="grid grid-cols-1 mx-auto w-full md:w-3xl">
+        {/* Succes eller fejl besked efter submit */}
+        {submitMessage && <p className={`p-4 mb-6 rounded ${submitMessage.includes("sent") ? "bg-green-800 text-primary" : "bg-red-800 text-primary"}`}>{submitMessage}</p>}
         {/* Navn felt */}
         <div className="mb-4">
           <input
@@ -104,11 +106,8 @@ const ContactForm = () => {
           {errors.comment && <p className="text-red-500 mt-1">{errors.comment.message}</p>}
         </div>
 
-        {/* Succes eller fejl besked efter submit */}
-        {submitMessage && <p className={`mb-4 text-center ${submitMessage.includes("sent") ? "text-green-500" : "text-red-500"}`}>{submitMessage}</p>}
-
         {/* Submit knap */}
-        <div className="flex justify-end">
+        <div className="flex justify-end mt-4">
           <Button text={isSubmitting ? "Sending..." : "Send"} />
         </div>
       </div>
