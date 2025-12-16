@@ -73,19 +73,17 @@ const Hero = () => {
           </motion.div>
 
           {/* Tagline med drop-in animation */}
-          {showTagline && (
-            <motion.div
-              className='flex flex-col items-center gap-4'
-              initial={{ opacity: 0, y: -40 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-            >
-              <h1 className='text-white text-[13px] md:text-[32px] font-bold uppercase tracking-[13px] md:tracking-[32px] mt-8 text-center'>
-                Have a good time
-              </h1>
-              <Image src='/bottom_line.png' alt='Line' width={300} height={50} />
-            </motion.div>
-          )}
+          <motion.div
+            className='absolute left-1/2 top-[60%] -translate-x-1/2 flex flex-col items-center gap-4'
+            initial={{ opacity: 0, y: -40 }}
+            animate={showTagline ? { opacity: 1, y: 0 } : { opacity: 0, y: -40 }}
+            transition={{ duration: 0.6 }}
+          >
+            <h1 className='text-white text-[13px] md:text-[32px] font-bold uppercase tracking-[13px] md:tracking-[32px] mt-8 text-center md:whitespace-nowrap'>
+              Have a good time
+            </h1>
+            <Image src='/bottom_line.png' alt='Line' width={300} height={50} />
+          </motion.div>
         </div>
       </section>
       {/* Sticky Header */}
