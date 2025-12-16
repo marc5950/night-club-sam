@@ -8,6 +8,8 @@ import { FaBackwardFast } from "react-icons/fa6";
 import { FaShuffle } from "react-icons/fa6";
 import { FaVolumeUp } from "react-icons/fa";
 
+import { Slider } from "@/components/ui/slider"; // Import af Slider komponenten
+
 // Definering af props typen for AudioPlayer komponenten
 interface AudioPlayerProps {
   // Interface bruges til at beskrive hvilke props komponenten forventer at modtage
@@ -39,7 +41,7 @@ const AudioPlayer = ({ audioRef, isPlaying, currentTrack, progress, duration, to
 
       {/* Fremdriftslinje */}
       <div className="flex items-center gap-2 w-full">
-        <input type="range" className="flex-1 h-1 custom-range appearance-none" max={100} value={isNaN(progress) ? 0 : progress} onChange={(e) => onProgressChange(Number(e.target.value))} />
+        <Slider value={[isNaN(progress) ? 0 : progress]} max={100} step={1} onValueChange={(value) => onProgressChange(value[0])} className="flex-1" />
       </div>
 
       {/* Mobile: Alt under hinanden */}
@@ -68,17 +70,14 @@ const AudioPlayer = ({ audioRef, isPlaying, currentTrack, progress, duration, to
         {/* Volume */}
         <div className="flex items-center justify-center gap-2 w-1/2 mx-auto">
           <FaVolumeUp className="text-primary text-2xl" />
-          <input
-            type="range"
-            className="h-1 custom-range w-32"
-            min={0} // Minimum volume
-            max={1} // Maximum volume
-            step={0.01} // Step for volume ændring
-            value={audioRef.current?.volume || 0.5} // Nuværende volume, default til 0.5 hvis audioRef er null
-            onChange={(e) => {
-              // Håndterer ændring i volume
-              if (!audioRef.current) return; // Tjekker om audioRef er null
-              audioRef.current.volume = Number(e.target.value); // Sætter den nye volume på audio elementet
+          <Slider
+            defaultValue={[50]}
+            max={100}
+            step={0.1}
+            className="w-32"
+            onValueCommit={(value) => {
+              if (!audioRef.current) return;
+              audioRef.current.volume = value[0] / 100;
             }}
           />
         </div>
@@ -109,16 +108,14 @@ const AudioPlayer = ({ audioRef, isPlaying, currentTrack, progress, duration, to
         {/* Volume */}
         <div className="flex items-center gap-2">
           <FaVolumeUp className="text-primary text-2xl" />
-          <input
-            type="range"
-            className="flex-1 h-1 custom-range w-18"
-            min={0}
-            max={1}
-            step={0.01}
-            value={audioRef.current?.volume || 0.5}
-            onChange={(e) => {
+          <Slider
+            defaultValue={[50]}
+            max={100}
+            step={0.1}
+            className="w-32"
+            onValueCommit={(value) => {
               if (!audioRef.current) return;
-              audioRef.current.volume = Number(e.target.value);
+              audioRef.current.volume = value[0] / 100;
             }}
           />
         </div>
