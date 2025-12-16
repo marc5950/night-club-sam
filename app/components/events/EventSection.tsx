@@ -85,14 +85,14 @@ const EventSection = ({ items }: Props) => {
   };
 
   return (
-    <section className='max-w-6xl mx-auto p-8 mt-20'>
-      <Title title='Upcoming Events' />
-      <div className='flex flex-col md:flex-row gap-4 justify-center'>
+    <section className="max-w-6xl mx-auto p-8 mt-2">
+      <Title title="Upcoming Events" />
+      <div className="flex flex-col md:flex-row gap-4 justify-center">
         {visibleEvents.map((event) => (
           <EventCard key={event.id} event={event} />
         ))}
       </div>
-      <ScrollBar count={slides} active={activeIndex} onSelect={handleSelect} activeColor='bg-secondary' color='bg-primary' />
+      <ScrollBar count={slides} active={activeIndex} onSelect={handleSelect} activeColor="bg-secondary" color="bg-primary" />
     </section>
   );
 };

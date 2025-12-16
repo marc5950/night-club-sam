@@ -48,7 +48,7 @@ const Newsletter = () => {
   };
 
   return (
-    <div className="justify-center items-center text-center py-8 px-4 max-w-[1440px] mx-auto ">
+    <div className="justify-center items-center text-center py-8 px-4 max-w-[1440px] mx-auto mb-10">
       <h4 className="text-primary text-title3 uppercase font-normal">Want the latest night club news</h4>
       <p className="text-primary mt-4 mb-10 text-p-big font-normal">
         Subscribe to our newsletter and never miss an <span className="text-secondary">Event</span>
@@ -79,7 +79,11 @@ const Newsletter = () => {
       </form>
 
       {/* Succes eller fejl besked efter submit */}
-      {submitMessage && <p className={`p-4 mb-6 rounded ${submitMessage.includes("Thank you") ? "bg-green-800 text-primary" : "bg-red-800 text-primary"}`}>{submitMessage}</p>}
+      {submitMessage && (
+        <p className={`p-4 mb-6 rounded ${submitMessage.includes("Thank you") ? "bg-green-800 text-primary" : "bg-red-800 text-primary"}`}>
+          {submitMessage}
+        </p>
+      )}
     </div>
   );
 };
