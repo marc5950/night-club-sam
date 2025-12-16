@@ -1,7 +1,9 @@
 "use client";
 import Image from "next/image";
+import { useState } from "react";
 import { Event } from "@/app/types/api";
 import { motion } from "framer-motion";
+import BorderHover from "../general/BorderHover";
 
 interface EventCardProps {
   event: Event;
@@ -21,9 +23,17 @@ const EventCard = ({ event }: EventCardProps) => {
     hour12: true,
   });
 
+  // Styre BorderHover, så den vises når der hover over kortet
+  const [isHovered, setIsHovered] = useState(false);
+
   return (
     <motion.article
       className='relative mb-15'
+      // Håndtere hover og touch events
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      onTouchStart={() => setIsHovered(true)}
+      onTouchEnd={() => setIsHovered(false)}
       whileHover='hover' // Hover tilstand
       initial='rest' // Starttilstand
       animate='rest' // Normal tilstand
@@ -59,6 +69,7 @@ const EventCard = ({ event }: EventCardProps) => {
           <div className='text-primary text-title3'>{event.title}</div>
           <div className='text-primary text-p-small line-clamp-3'>{event.description}</div>
         </motion.div>
+        <BorderHover isHovered={isHovered} />
       </div>
       <div className='flex absolute bg-secondary text-primary w-full gap-4 p-1 text-p-big'>
         <span>{formattedDate}</span>
