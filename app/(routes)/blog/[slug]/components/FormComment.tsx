@@ -52,6 +52,8 @@ const FormComment = ({ blogpostId }: FormCommentProps) => {
   return (
     <form className="max-w-[1440px] p-4 mx-auto mt-10 mb-10 md:ml-42 md:mr-42 md:p-0" noValidate onSubmit={handleSubmit(onSubmit)}>
       <h3 className="text-primary text-[32px] mb-4 uppercase font-bold">Leave a Comment</h3>
+      {/* Succes eller fejl besked */}
+      {submitMessage && <p className={`p-4 mb-6 rounded ${submitMessage.includes("added") ? "bg-green-800 text-primary" : "bg-red-800 text-primary"}`}>{submitMessage}</p>}
 
       {/* Navn og Email felter - side om side på desktop */}
       <div className="grid grid-cols-1 md:grid-cols-2 md:gap-4 mx-auto">
@@ -97,9 +99,6 @@ const FormComment = ({ blogpostId }: FormCommentProps) => {
         <textarea className="placeholder-primary border border-primary focus:outline-none focus:border-[#FF2A70] focus:ring-0 focus:bg-black bg-black p-4 w-full h-70" id="comment" placeholder="Your Comment" {...register("comment", { required: "Please enter your comment" })}></textarea>
         {errors.comment && <p className="text-red-500 mt-1">{errors.comment.message}</p>}
       </div>
-
-      {/* Succes eller fejl besked */}
-      {submitMessage && <p className={`mb-4 text-center ${submitMessage.includes("added") ? "text-green-500" : "text-red-500"}`}>{submitMessage}</p>}
 
       {/* Submit knap - disabled mens der sendes */}
       <div className="flex justify-end">

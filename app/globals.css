@@ -120,30 +120,6 @@ body {
   font-size: var(--p-small);
 }
 
-/* Custom styles for range input */
-
-.custom-range {
-  -webkit-appearance: none;
-  width: 100%;
-  background: transparent;
-}
-
-.custom-range::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  width: 15px;
-  height: 15px;
-  background: #fff; /* hvid thumb */
-  border-radius: 50%;
-  cursor: pointer;
-  margin-top: -5px; /* centrerer cirklen */
-}
-
-.custom-range::-webkit-slider-runnable-track {
-  height: 4px;
-  background: #ff2a70;
-  border-radius: 2px;
-}
-
 .dark {
   --background: oklch(0.145 0 0);
   --foreground: oklch(0.985 0 0);

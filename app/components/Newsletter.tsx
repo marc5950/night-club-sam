@@ -55,7 +55,7 @@ const Newsletter = () => {
       </p>
 
       {/* Form wrapper omkring både input OG button */}
-      <form onSubmit={handleSubmit(onSubmit)} noValidate className="flex flex-col md:flex-row items-start gap-4 justify-center mb-5">
+      <form onSubmit={handleSubmit(onSubmit)} noValidate className="flex flex-col md:flex-row items-center md:items-start gap-4 justify-center mb-5">
         {/* Email felt */}
         <div className="flex flex-col">
           <input
@@ -79,7 +79,7 @@ const Newsletter = () => {
       </form>
 
       {/* Succes eller fejl besked efter submit */}
-      {submitMessage && <p className={`text-center ${submitMessage.includes("Thank you") ? "text-green-500" : "text-red-500"}`}>{submitMessage}</p>}
+      {submitMessage && <p className={`p-4 mb-6 rounded ${submitMessage.includes("Thank you") ? "bg-green-800 text-primary" : "bg-red-800 text-primary"}`}>{submitMessage}</p>}
     </div>
   );
 };
