@@ -6,6 +6,11 @@ import { getBlogPosts, getBlogPostWithComments } from "@/app/lib/api";
 import CommentList from "./components/CommentList";
 import CommentEl from "./components/CommentEl";
 
+export const metadata = {
+  title: "Night Club - Blog Post",
+  description: "Read our latest blog posts and news",
+};
+
 interface PageProps {
   params: Promise<{
     slug: string;
