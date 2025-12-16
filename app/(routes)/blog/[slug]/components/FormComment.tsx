@@ -51,7 +51,7 @@ const FormComment = ({ blogpostId }: FormCommentProps) => {
 
   return (
     <form className="max-w-[1440px] p-4 mx-auto mt-10 mb-10 md:ml-42 md:mr-42 md:p-0" onSubmit={handleSubmit(onSubmit)}>
-      <h3 className="text-primary text-[32px] mb-4 font-bold">LEAVE A COMMENT</h3>
+      <h3 className="text-primary text-[32px] mb-4 uppercase font-bold">Leave a Comment</h3>
 
       {/* Navn og Email felter - side om side på desktop */}
       <div className="grid grid-cols-1 md:grid-cols-2 md:gap-4 mx-auto">
