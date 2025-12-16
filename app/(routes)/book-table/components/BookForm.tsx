@@ -100,13 +100,17 @@ const BookForm = ({ selectedTable }: BookFormProps) => {
   };
 
   return (
-    <form className="max-w-[1440px] p-6 mx-auto" noValidate onSubmit={handleSubmit(onSubmit)}>
+    <form className="max-w-[1440px] p-8 md:pl-30 md:pr-40 mx-auto mb-10" noValidate onSubmit={handleSubmit(onSubmit)}>
       {/* --- 1. Formular Overskrift --- */}
       <h3 className="text-primary text-[32px] mb-4 font-bold">BOOK A TABLE</h3>
 
       {/* --- 2. Feedback Besked (Succes eller Fejl) --- */}
       {/* Vises kun hvis der er en status besked fra onSubmit */}
-      {submitStatus && <div className={`p-4 mb-6 rounded ${submitStatus.success ? "bg-green-800 text-primary" : "bg-red-800 text-primary"}`}>{submitStatus.message}</div>}
+      {submitStatus && (
+        <div className={`p-4 mb-6 rounded ${submitStatus.success ? "bg-green-800 text-primary" : "bg-red-800 text-primary"}`}>
+          {submitStatus.message}
+        </div>
+      )}
 
       {/* --- 3. Input Felter (Grid Layout) --- */}
       <div className="grid grid-cols-1 md:grid-cols-2 md:gap-4 mx-auto">
@@ -124,39 +128,69 @@ const BookForm = ({ selectedTable }: BookFormProps) => {
 
         {/* Email Felt */}
         <div className="mb-4">
-          <input className="text-primary focus:bg-background bg-background border border-primary placeholder-primary p-4 w-full focus:outline-none focus:border-[#FF2A70] focus:ring-0" id="email" type="email" placeholder="Your Email" {...register("email")} />
+          <input
+            className="text-primary focus:bg-background bg-background border border-primary placeholder-primary p-4 w-full focus:outline-none focus:border-[#FF2A70] focus:ring-0"
+            id="email"
+            type="email"
+            placeholder="Your Email"
+            {...register("email")}
+          />
           {errors.email && <p className="text-red-500 mt-1">{errors.email.message}</p>}
         </div>
 
         {/* Bordnummer Felt */}
         <div className="mb-4">
           {/* Vi bruger valueAsNumber: true for at sikre at inputtet bliver sendt som et tal til Zod. */}
-          <input className="placeholder-primary focus:bg-background text-primary bg-background border border-primary p-4 w-full focus:outline-none focus:border-[#FF2A70] focus:ring-0" type="number" placeholder="Table Number" {...register("table", { valueAsNumber: true })} />
+          <input
+            className="placeholder-primary focus:bg-background text-primary bg-background border border-primary p-4 w-full focus:outline-none focus:border-[#FF2A70] focus:ring-0"
+            type="number"
+            placeholder="Table Number"
+            {...register("table", { valueAsNumber: true })}
+          />
           {errors.table && <p className="text-red-500 mt-1">{errors.table.message}</p>}
         </div>
 
         {/* Antal Gæster Felt */}
         <div className="mb-4">
-          <input className="placeholder-primary focus:bg-background text-primary bg-background border border-primary p-4 w-full focus:outline-none focus:border-[#FF2A70] focus:ring-0" type="number" placeholder="Number of Guests" {...register("numberOfGuests", { valueAsNumber: true })} />
+          <input
+            className="placeholder-primary focus:bg-background text-primary bg-background border border-primary p-4 w-full focus:outline-none focus:border-[#FF2A70] focus:ring-0"
+            type="number"
+            placeholder="Number of Guests"
+            {...register("numberOfGuests", { valueAsNumber: true })}
+          />
           {errors.numberOfGuests && <p className="text-red-500 mt-1">{errors.numberOfGuests.message}</p>}
         </div>
 
         {/* Dato Vælger */}
         <div className="mb-4">
-          <input className="placeholder-primary focus:bg-background text-primary bg-background border border-primary p-4 w-full focus:outline-none focus:border-[#FF2A70] focus:ring-0" type="date" placeholder="Select Date" {...register("date")} />
+          <input
+            className="placeholder-primary focus:bg-background text-primary bg-background border border-primary p-4 w-full focus:outline-none focus:border-[#FF2A70] focus:ring-0"
+            type="date"
+            placeholder="Select Date"
+            {...register("date")}
+          />
           {errors.date && <p className="text-red-500 mt-1">{errors.date.message}</p>}
         </div>
 
         {/* Telefonnummer Felt */}
         <div className="mb-4">
-          <input className="placeholder-primary text-primary bg-background border-primary border p-4 w-full focus:bg-background focus:outline-none focus:border-[#FF2A70] focus:ring-0" type="text" placeholder="Your Contact Number" {...register("contactNumber")} />
+          <input
+            className="placeholder-primary text-primary bg-background border-primary border p-4 w-full focus:bg-background focus:outline-none focus:border-[#FF2A70] focus:ring-0"
+            type="text"
+            placeholder="Your Contact Number"
+            {...register("contactNumber")}
+          />
           {errors.contactNumber && <p className="text-red-500 mt-1">{errors.contactNumber.message}</p>}
         </div>
       </div>
 
       {/* --- 4. Kommentar Felt (Textarea) --- */}
       <div className="mb-4">
-        <textarea className="placeholder-primary border border-primary focus:outline-none focus:border-[#FF2A70] focus:ring-0 focus:bg-background bg-background p-4 w-full h-70" id="comment" placeholder="Your Comment" {...register("comment")}></textarea>
+        <textarea
+          className="placeholder-primary border border-primary focus:outline-none focus:border-[#FF2A70] focus:ring-0 focus:bg-background bg-background p-4 w-full h-70"
+          id="comment"
+          placeholder="Your Comment"
+          {...register("comment")}></textarea>
         {errors.comment && <p className="text-red-500 mt-1">{errors.comment.message}</p>}
       </div>
 

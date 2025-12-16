@@ -58,7 +58,8 @@ const MusicTrack = () => {
   // Vælg et tilfældigt track (ikke det nuværende)
   const shuffleTrack = () => {
     let next = currentTrackIndex; // Start med at sætte next til det nuværende track index
-    while (next === currentTrackIndex) { // Bliv ved med at vælge et nyt index indtil det er forskelligt
+    while (next === currentTrackIndex) {
+      // Bliv ved med at vælge et nyt index indtil det er forskelligt
       next = Math.floor(Math.random() * tracks.length); // Vælg et tilfældigt index
     }
     setCurrentTrackIndex(next); // Opdater state med det nye track index
@@ -113,15 +114,33 @@ const MusicTrack = () => {
   const activeImage = trackImages.find((img) => img.trackIndex === currentTrackIndex) || trackImages[0];
 
   return (
-    <div className="max-w-[1440px] px-6 mx-auto my-40">
+    <div className="max-w-[1440px] px-6 mx-auto my-20">
       <Title title="Night Club Track" />
 
       {/* Mobile view */}
       <div className="md:hidden">
-        <AudioPlayer audioRef={audioRef} isPlaying={isPlaying} currentTrack={tracks[currentTrackIndex]} progress={progress} duration={duration} togglePlay={togglePlay} skipForward={skipForward} skipBackward={skipBackward} shuffleTrack={shuffleTrack} handleTimeUpdate={handleTimeUpdate} handleDurationChange={handleDurationChange} formatTime={formatTime} onProgressChange={handleProgressChange} />
+        <AudioPlayer
+          audioRef={audioRef}
+          isPlaying={isPlaying}
+          currentTrack={tracks[currentTrackIndex]}
+          progress={progress}
+          duration={duration}
+          togglePlay={togglePlay}
+          skipForward={skipForward}
+          skipBackward={skipBackward}
+          shuffleTrack={shuffleTrack}
+          handleTimeUpdate={handleTimeUpdate}
+          handleDurationChange={handleDurationChange}
+          formatTime={formatTime}
+          onProgressChange={handleProgressChange}
+        />
 
         <div className="flex justify-center items-center pt-8">
-          <TrackImage src={trackImages[visibleImageIndex].src} title={tracks[trackImages[visibleImageIndex].trackIndex].title} onClick={() => handleTrackSelect(trackImages[visibleImageIndex].trackIndex)} />
+          <TrackImage
+            src={trackImages[visibleImageIndex].src}
+            title={tracks[trackImages[visibleImageIndex].trackIndex].title}
+            onClick={() => handleTrackSelect(trackImages[visibleImageIndex].trackIndex)}
+          />
         </div>
 
         <div className="flex justify-center gap-8 mt-10">
@@ -139,10 +158,28 @@ const MusicTrack = () => {
         <div className="flex flex-col items-center">
           <div className="grid grid-cols-4 gap-8 items-center">
             <div className="col-span-1 justify-end flex">
-              <TrackImage src={activeImage.src} title={tracks[activeImage.trackIndex].title} onClick={() => handleTrackSelect(activeImage.trackIndex)} />
+              <TrackImage
+                src={activeImage.src}
+                title={tracks[activeImage.trackIndex].title}
+                onClick={() => handleTrackSelect(activeImage.trackIndex)}
+              />
             </div>
             <div className="col-span-3">
-              <AudioPlayer audioRef={audioRef} isPlaying={isPlaying} currentTrack={tracks[currentTrackIndex]} progress={progress} duration={duration} togglePlay={togglePlay} skipForward={skipForward} skipBackward={skipBackward} shuffleTrack={shuffleTrack} handleTimeUpdate={handleTimeUpdate} handleDurationChange={handleDurationChange} formatTime={formatTime} onProgressChange={handleProgressChange} />
+              <AudioPlayer
+                audioRef={audioRef}
+                isPlaying={isPlaying}
+                currentTrack={tracks[currentTrackIndex]}
+                progress={progress}
+                duration={duration}
+                togglePlay={togglePlay}
+                skipForward={skipForward}
+                skipBackward={skipBackward}
+                shuffleTrack={shuffleTrack}
+                handleTimeUpdate={handleTimeUpdate}
+                handleDurationChange={handleDurationChange}
+                formatTime={formatTime}
+                onProgressChange={handleProgressChange}
+              />
             </div>
           </div>
 
@@ -151,8 +188,7 @@ const MusicTrack = () => {
               onClick={() => {
                 scrollLeft();
                 handleValue();
-              }}
-            >
+              }}>
               <ScrollLeft />
             </button>
 
@@ -166,8 +202,7 @@ const MusicTrack = () => {
               onClick={() => {
                 scrollRight();
                 handleNext();
-              }}
-            >
+              }}>
               <ScrollRight />
             </button>
           </div>
