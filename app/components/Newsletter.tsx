@@ -2,6 +2,13 @@
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 import Button from "./general/Button";
+import { createNewsletterSubscription } from "../lib/api";
+
+export interface NewsletterSubscription {
+  id: number;
+  email: string;
+  subscribedAt: string;
+}
 
 const Newsletter = () => {
   // State til at håndtere om formularen er ved at blive sendt
@@ -10,7 +17,7 @@ const Newsletter = () => {
   // State til at vise succes eller fejl besked til brugeren
   const [submitMessage, setSubmitMessage] = useState("");
 
-  // React Hook Form setup - håndterer formularvalidering og data
+  // React Hook Form setup - hånsdterer formularvalidering og data
   const {
     register, // Registrerer input felter til validering
     handleSubmit, // Wrapper submit funktionen og validerer først
@@ -25,15 +32,18 @@ const Newsletter = () => {
     console.log("Email:", data);
 
     try {
+      // Brug API funktionen fra api.ts
+      await createNewsletterSubscription({ email: data.email });
+
       // Hvis succesfuld - vis succes besked
       setSubmitMessage("Tak for din tilmelding! Du vil modtage vores nyhedsbrev.");
-      reset(); // Nulstiller formularen
+      reset();
     } catch (error) {
       // Hvis der sker en fejl - vis fejl besked
       setSubmitMessage("Der opstod en fejl under tilmelding. Prøv venligst igen.");
       console.error("Error:", error);
     } finally {
-      setIsSubmitting(false); // Fjerner loading state uanset resultat
+      setIsSubmitting(false);
     }
   };
 
