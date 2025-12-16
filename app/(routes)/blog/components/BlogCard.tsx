@@ -46,7 +46,7 @@ const BlogCard = ({ post, imagePosition }: BlogCardProps) => {
 
       {/* TEKST SEKTION */}
       <div className="md:w-1/2 p-8 flex flex-col justify-center">
-        <h2 className="text-3xl font-bold text-primary mb-4">{post.title}</h2>
+        <h2 className="text-3xl font-bold text-primary mb-4 uppercase">{post.title}</h2>
 
         {/* META INFO (Forfatter, kommentarer, dato) */}
         <div className="flex items-center gap-4 text-secondary text-sm mb-4">
