@@ -41,6 +41,7 @@ const AudioPlayer = ({ audioRef, isPlaying, currentTrack, progress, duration, to
 
       {/* Fremdriftslinje */}
       <div className="flex items-center gap-2 w-full">
+        {/* Brug af Slider komponenten til fremdriftslinjen */}
         <Slider value={[isNaN(progress) ? 0 : progress]} max={100} step={1} onValueChange={(value) => onProgressChange(value[0])} className="flex-1" />
       </div>
 
@@ -71,13 +72,14 @@ const AudioPlayer = ({ audioRef, isPlaying, currentTrack, progress, duration, to
         <div className="flex items-center justify-center gap-2 w-1/2 mx-auto">
           <FaVolumeUp className="text-primary text-2xl" />
           <Slider
-            defaultValue={[50]}
-            max={100}
-            step={0.1}
+            defaultValue={[50]} // Standard volume værdi
+            max={100} // Maksimal volume værdi
+            step={0.1} // Step størrelse for volume justering
             className="w-32"
             onValueCommit={(value) => {
-              if (!audioRef.current) return;
-              audioRef.current.volume = value[0] / 100;
+              // Kører når brugeren slipper slideren
+              if (!audioRef.current) return; // Tjekker om audioRef er sat
+              audioRef.current.volume = value[0] / 100; // Opdaterer audioens volume baseret på slider værdi
             }}
           />
         </div>
