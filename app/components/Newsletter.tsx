@@ -48,19 +48,19 @@ const Newsletter = () => {
   };
 
   return (
-    <div className="justify-center items-center text-center py-8 px-4 max-w-[1440px] mx-auto ">
-      <h4 className="text-primary text-title3 uppercase font-normal">Want the latest night club news</h4>
-      <p className="text-primary mt-4 mb-10 text-p-big font-normal">
-        Subscribe to our newsletter and never miss an <span className="text-secondary">Event</span>
+    <div className='justify-center items-center text-center py-8 px-4 max-w-[1440px] mx-auto '>
+      <h4 className='text-primary text-title3 uppercase font-normal'>Want the latest night club news</h4>
+      <p className='text-primary mt-4 mb-10 text-p-big font-normal'>
+        Subscribe to our newsletter and never miss an <span className='text-secondary'>Event</span>
       </p>
 
       {/* Form wrapper omkring både input OG button */}
-      <form onSubmit={handleSubmit(onSubmit)} noValidate className="flex flex-col md:flex-row items-center gap-4 justify-center mb-5">
+      <form onSubmit={handleSubmit(onSubmit)} noValidate className='flex flex-col md:flex-row items-start gap-4 justify-center mb-5'>
         {/* Email felt */}
-        <div className="flex flex-col">
+        <div className='flex flex-col'>
           <input
-            type="email"
-            placeholder="Enter your email"
+            type='email'
+            placeholder='Enter your email'
             {...register("email", {
               required: "Angiv venligst din email", // Validering: Email er påkrævet
               pattern: {
@@ -68,10 +68,10 @@ const Newsletter = () => {
                 message: "Ugyldig email adresse", // Fejlbesked ved ugyldig email
               },
             })}
-            className="focus:bg-background focus:border-[#FF2A70] focus:outline-none focus:ring-0 bg-background border-primary placeholder-primary border-b text-primary text-lg px-4 py-4 capitalize w-70 md:w-130"
+            className='focus:bg-background focus:border-[#FF2A70] focus:outline-none focus:ring-0 bg-background border-primary placeholder-primary border-b text-primary text-lg px-4 py-4 capitalize w-70 md:w-130'
           />
           {/* Viser fejlbesked hvis email ikke er udfyldt eller ugyldig */}
-          {errors.email && <p className="text-red-500 mt-1 text-sm text-left">{errors.email.message}</p>}
+          {errors.email && <p className='text-red-500 mt-1 text-sm text-left'>{errors.email.message}</p>}
         </div>
 
         {/* Submit knap */}
