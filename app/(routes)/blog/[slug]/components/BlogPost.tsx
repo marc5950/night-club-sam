@@ -24,10 +24,16 @@ const BlogPost = ({ post }: BlogPostProps) => {
       </div>
       <div className="p-4 md:p-0">
         <h4 className="text-2xl mb-2 uppercase text-primary">{post.title}</h4>
-        <p className="text-secondary mb-2">
-          {post.author} / {commentCount} Comments / {formattedDate}
-        </p>
-        <p className="text-lg text-primary">{post.content}</p>
+        <div className="flex items-center gap-4 text-secondary text-sm mb-4">
+          <span>By {post.author}</span>
+          <span>/</span>
+          <span>
+            {commentCount} {commentCount === 1 ? "kommentar" : "kommentarer"}
+          </span>
+          <span>/</span>
+          <span>{formattedDate}</span>
+        </div>
+        <p className="text-gray-300 text-lg">{post.content}</p>
       </div>
     </article>
   );
