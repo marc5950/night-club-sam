@@ -162,9 +162,9 @@ export const getGalleryPhotos = () => apiGet<GalleryPhoto[]>("/gallery");
 // ============================================================================
 // NEWSLETTER
 // ============================================================================
-export const getNewsletterSubscriptions = () => apiGet<NewsletterSubscription[]>("/newsletter-subscriptions");
+export const getNewsletterSubscriptions = () => apiGet<NewsletterSubscription[]>("/newsletters");
 
-export const createNewsletterSubscription = (sub: Omit<NewsletterSubscription, "id" | "subscribedAt">) => apiPost<NewsletterSubscription>("/newsletter-subscriptions", sub);
+export const createNewsletterSubscription = (sub: Omit<NewsletterSubscription, "id" | "subscribedAt">) => apiPost<NewsletterSubscription>("/newsletters", sub);
 
 // ============================================================================
 // RESERVATIONS
