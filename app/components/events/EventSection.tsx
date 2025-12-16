@@ -4,14 +4,12 @@ import Title from "../general/Title";
 import EventCard from "./EventCard";
 import ScrollBar from "../ScrollBar";
 import { Event } from "@/app/types/api";
-import { getEvents } from "@/app/lib/api";
+type Props = { items: Event[] };
 
 // Definerer EventSection komponenten
-const EventSection = () => {
-	// Gemmer alle events hentet fra API'et
-	// <Event[]> angiver at det er et array af Event objekter
-	// Starter som et tomt array, indtil data er hentet
-	const [events, setEvents] = useState<Event[]>([]);
+const EventSection = ({ items }: Props) => {
+	// Events kommer som props fra page.tsx altså fra server-side fetch
+	const events = items;
 	// activeIndex holder styr på hvilken slide der vises. Starter på 0
 	// setActiveIndex er funktionen til at opdatere activeIndex
 	const [activeIndex, setActiveIndex] = useState(0);
@@ -25,19 +23,7 @@ const EventSection = () => {
 	// Derfor bruger vi ReturnType<typeof setInterval>, som passer til projektets typings.
 	const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
-	// Funktion der henter events fra API'et
-	useEffect(() => {
-		// async betyder: "jeg skal hente noget ude fra nettet, og det kan tage tid"
-		const fetchEvents = async () => {
-			// Events hentes fra API og venter på svar
-			// Når data er hentet, sættes det i state variablen
-			const data = await getEvents();
-			// State variablen opdateres med de hentede events
-			setEvents(data);
-		};
-		// Funktion kaldes
-		fetchEvents();
-	}, []);
+	// Ingen client-side fetch; data er fetched i Server Component
 
 	// Beregner antal slides (2 events pr. slide)
 	// Math.ceil runder op til nærmeste hele tal
