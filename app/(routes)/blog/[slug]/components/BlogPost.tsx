@@ -23,7 +23,7 @@ const BlogPost = ({ post }: BlogPostProps) => {
         <Image src={post.asset.url} alt={post.asset.alt || post.title} fill className="object-cover" unoptimized />
       </div>
       <div className="p-4 md:p-0">
-        <h4 className="text-2xl mb-2 uppercase text-primary">{post.title}</h4>
+        <h2 className="text-3xl font-bold text-primary mb-4 uppercase">{post.title}</h2>
         <div className="flex items-center gap-4 text-secondary text-sm mb-4">
           <span>By {post.author}</span>
           <span>/</span>
