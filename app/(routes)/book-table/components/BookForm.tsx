@@ -185,7 +185,7 @@ const BookForm = ({ selectedTable }: BookFormProps) => {
       </div>
 
       {/* --- 4. Kommentar Felt (Textarea) --- */}
-      <div className="mb-4">
+      <div className="mb-4 pt-4">
         <textarea
           className="placeholder-primary border border-primary focus:outline-none focus:border-[#FF2A70] focus:ring-0 focus:bg-background bg-background p-4 w-full h-70"
           id="comment"
