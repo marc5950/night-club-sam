@@ -55,7 +55,7 @@ const Newsletter = () => {
       </p>
 
       {/* Form wrapper omkring både input OG button */}
-      <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col md:flex-row items-center gap-4 justify-center mb-5">
+      <form onSubmit={handleSubmit(onSubmit)} noValidate className="flex flex-col md:flex-row items-center gap-4 justify-center mb-5">
         {/* Email felt */}
         <div className="flex flex-col">
           <input
