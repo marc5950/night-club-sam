@@ -28,7 +28,7 @@ const EventCard = ({ event }: EventCardProps) => {
 
   return (
     <motion.article
-      className='relative mb-15'
+      className='relative mb-22'
       // Håndtere hover og touch events
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
@@ -66,8 +66,8 @@ const EventCard = ({ event }: EventCardProps) => {
           }}
           transition={{ duration: 0.2 }}
         >
-          <div className='text-primary text-title3'>{event.title}</div>
-          <div className='text-primary text-p-small line-clamp-3'>{event.description}</div>
+          <div className='text-primary font-bold text-title3'>{event.title}</div>
+          <div className='text-primary text-p-small line-clamp-2 md:line-clamp-3'>{event.description}</div>
         </motion.div>
         <BorderHover isHovered={isHovered} />
       </div>

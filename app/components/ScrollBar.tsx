@@ -8,10 +8,10 @@ interface ScrollBarProps {
   color: string; // Farve for inaktive prikker
 }
 
-const ScrollBar = ({ active, onSelect, activeColor, color }: ScrollBarProps) => (
+const ScrollBar = ({ count = 3, active, onSelect, activeColor, color }: ScrollBarProps) => (
   <div className='flex justify-center gap-4'>
-    {/* 3 prikker laves, som kan vælges */}
-    {Array.from({ length: 3 }).map((_, id) => (
+    {/* Prikker laves dynamisk baseret på count prop */}
+    {Array.from({ length: count }).map((_, id) => (
       <button
         key={id} // Hver prik får et unikt key baseret på dens id
         onClick={() => onSelect(id)} // Når der klikkes på en prik, kaldes funktionen onSelect med prikens id
