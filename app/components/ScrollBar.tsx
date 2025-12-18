@@ -1,5 +1,3 @@
-"use client";
-
 interface ScrollBarProps {
   count?: number; // Antal prikker der skal vises
   active: number; // Hvilken prik der er aktiv, altså den der er valgt

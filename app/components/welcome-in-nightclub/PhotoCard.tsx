@@ -1,4 +1,3 @@
-"use client";
 import Image from "next/image";
 import { useState } from "react";
 import BorderHover from "../general/BorderHover";
@@ -14,6 +13,7 @@ interface PhotoCardProps {
 const PhotoCard = ({ image, icon, title, desc }: PhotoCardProps) => {
   // Styre BorderHover, så den vises når der hover over kortet
   const [isHovered, setIsHovered] = useState(false);
+
   return (
     <motion.div
       className='relative w-full sm:w-60 h-80 overflow-hidden cursor-pointer'
