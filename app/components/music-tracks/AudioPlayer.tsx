@@ -43,6 +43,9 @@ const AudioPlayer = ({ audioRef, isPlaying, currentTrack, progress, duration, to
       <div className="flex items-center gap-2 w-full">
         {/* Brug af Slider komponenten til fremdriftslinjen */}
         <Slider value={[isNaN(progress) ? 0 : progress]} max={100} step={1} onValueChange={(value) => onProgressChange(value[0])} className="flex-1" />
+          {/* isNaN(progress) tjekker om progress er et tal, hvis ikke sættes værdien til 0 */}
+          {/* Hvis progress ikke er NaN, bruges den aktuelle progress værdi */}
+          {/* onProgressChange håndterer ændring i fremdrift når brugeren trækker i slideren */}
       </div>
 
       {/* Mobile: Alt under hinanden */}
