@@ -7,7 +7,7 @@ import { cn } from "@/lib/utils"; // Import af en hjælpefunktion til at kombine
 
 // Funktion til Slider komponenten
 function Slider({ className, defaultValue, value, min = 0, max = 100, ...props }: React.ComponentProps<typeof SliderPrimitive.Root>) {
-// Funktionen modtager alle props som Radix Slider understøtter
+// Funktionen modtager alle props som Slideren understøtter
 // Der er givet nogle standardværdier for min og max og andre props sendes videre til SliderPrimitive.Root
 
 
